@@ -24,17 +24,17 @@ class _LoginScreenState extends State<LoginScreen> {
     if (response.statusCode == 200) {
       Map<String, dynamic> list = jsonDecode(response.body);
       await token.write(key: 'token', value: list['access_token']);
-      print(email);
-      print(passwd);
-      print(response.statusCode);
-      print(list);
-      //print(response.body);
+      // print(email);
+      // print(passwd);
+      // print(response.statusCode);
+      // print(list);
+      // print(response.body);
       var a = await token.read(key: 'token');
-      print("aaa");
-      print(a);
-      Navigator.pushNamed(context, '/');
+      // print("aaa");
+      // print(a);
+      Navigator.pushNamed(context, '/homePage');
     } else if (response.statusCode == 401) {
-      print("login error");
+      // print("login error");
     }
   }
 

@@ -1,5 +1,7 @@
-import 'package:campsite_fms_app_manager/sign/login.dart';
-import 'package:campsite_fms_app_manager/sign/signUp.dart';
+import 'package:campsite_fms_app_manager/controll/ctrlPage.dart';
+import 'package:campsite_fms_app_manager/homePage/homePage.dart';
+import 'package:campsite_fms_app_manager/more/morePage.dart';
+import 'package:campsite_fms_app_manager/notification/notiPage.dart';
 import 'package:flutter/material.dart';
 
 class MainFunction extends StatefulWidget {
@@ -16,14 +18,14 @@ class _MainFunctionState extends State<MainFunction> {
       body: IndexedStack(
         index: currentPage,
         children: [
-          LoginScreen(),
-          LoginScreen(),
-          SignUpScreen(),
-          SignUpScreen()
+          HomePageScreen(),
+          CtrlPageScreen(),
+          NotiPageScreen(),
+          MorePageScreen(),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.yellow,
+        color: Colors.blue,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
