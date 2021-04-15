@@ -1,7 +1,7 @@
-import 'package:campsite_fms_app_manager/controll/ctrlPage.dart';
-import 'package:campsite_fms_app_manager/homePage/homePage.dart';
-import 'package:campsite_fms_app_manager/more/morePage.dart';
-import 'package:campsite_fms_app_manager/notification/notiPage.dart';
+import 'package:campsite_fms_app_manager/screen/controll/ctrlPage.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/homePage.dart';
+import 'package:campsite_fms_app_manager/screen/more/morePage.dart';
+import 'package:campsite_fms_app_manager/screen/notification/notiPage.dart';
 import 'package:flutter/material.dart';
 
 class MainFunction extends StatefulWidget {

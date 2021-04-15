@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       var a = await token.read(key: 'token');
       // print("aaa");
       // print(a);
-      Navigator.pushNamed(context, '/homePage');
+      Navigator.pushNamed(context, '/mainFunction');
     } else if (response.statusCode == 401) {
       // print("login error");
     }

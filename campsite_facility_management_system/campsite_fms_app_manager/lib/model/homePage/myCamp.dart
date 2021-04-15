@@ -1,6 +1,6 @@
+import 'package:campsite_fms_app_manager/screen/homePage/addCamp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:campsite_fms_app_manager/function/myInfo.dart';
 
 class MyCampScreen extends StatefulWidget {
   @override
@@ -9,7 +9,6 @@ class MyCampScreen extends StatefulWidget {
 
 class MyCampScreenState extends State<MyCampScreen> {
   final token = new FlutterSecureStorage();
-  final myInfo = new MyInfo();
   String campName = 'defaule camp name';
   var resCount = '0';
   var ordCount = '0';
@@ -50,7 +49,9 @@ class MyCampScreenState extends State<MyCampScreen> {
                 flex: 4,
                 child: RaisedButton(
                   child: Text('등록/수정'),
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/addCamp');
+                  },
                 ),
               ),
             ],

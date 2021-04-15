@@ -1,7 +1,7 @@
+import 'package:campsite_fms_app_manager/function/token.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/sign/token.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,14 +14,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 4), () {
-      Navigator.pushNamed(context, nextPage());
+    Future.delayed(Duration(seconds: 1), () {
+      nextPage();
     });
     super.initState();
   }
 
   nextPage() async {
     var tokenStatus = await token.tokenTest();
+    print('tokenstatus: ' + tokenStatus.toString());
     if (tokenStatus) {
       Navigator.pushNamed(context, '/mainFunction');
     } else {

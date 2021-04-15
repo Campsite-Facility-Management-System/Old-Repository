@@ -13,12 +13,12 @@ class Token {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, body: {
+    var response = await http.post(url, headers: {
       'Authorization': myToken,
     });
 
-    print(myToken);
-    print(response.body);
+    print('tokenTest(myToken): ' + myToken);
+    print('tokenTest(response.body): ' + response.body);
     if (response.body.contains("success")) {
       b = true;
     }

@@ -1,10 +1,10 @@
-import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/homePage/myCamp.dart';
+import 'package:campsite_fms_app_manager/model/homePage/myCamp.dart';
+import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:campsite_fms_app_manager/env.dart';
-import 'package:campsite_fms_app_manager/homePage/profile.dart';
+import 'dart:convert';
 
 class HomePageScreen extends StatefulWidget {
   @override
@@ -13,16 +13,6 @@ class HomePageScreen extends StatefulWidget {
 
 class HomePageScreenState extends State<HomePageScreen> {
   final token = new FlutterSecureStorage();
-
-  myInfo() async {
-    var url = Env.url + '/api/auth/me';
-    String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
-
-    var response = await http.post(url, body: {
-      'Authorization': myToken,
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
