@@ -1,6 +1,8 @@
 import 'package:campsite_fms_app_manager/function/searchFunction.dart';
 import 'package:campsite_fms_app_manager/screen/controll/ctrlPage.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCamp.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addCategory.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/homePage.dart';
 import 'package:campsite_fms_app_manager/screen/more/morePage.dart';
 import 'package:campsite_fms_app_manager/screen/notification/notiPage.dart';
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         '/morePage': (context) => MorePageScreen(),
         '/homePage': (context) => HomePageScreen(),
         '/addCamp': (context) => AddCampScreen(),
+        '/addDevice': (context) => AddDeviceScreen(),
+        '/addCategory': (context) => AddCategoryScreen(),
       },
     );
   }

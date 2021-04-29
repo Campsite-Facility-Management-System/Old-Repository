@@ -48,9 +48,9 @@ class MyCampScreenState extends State<MyCampScreen> {
               Expanded(
                 flex: 4,
                 child: RaisedButton(
-                  child: Text('등록/수정'),
+                  child: Text('관리'),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/addCamp');
+                    Navigator.pushNamed(context, '/addCategory');
                   },
                 ),
               ),

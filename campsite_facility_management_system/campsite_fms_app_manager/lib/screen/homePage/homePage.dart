@@ -48,6 +48,12 @@ class HomePageScreenState extends State<HomePageScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addCamp');
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
