@@ -10,15 +10,32 @@ use App\Models\User;
 
 class JWTAuthController extends Controller
 {
-    public function register(Request $request){
+    public function managerRegister(Request $request){
         $user = new User;
         $user->email = $request ->email;
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
-        //$user->phone = $request->phone;
-        //$user->nickname=$request->nickname;
-       // $user->profile_img_url= '';
-       // $user->expert_is = false;
+        $user->phone_number = $request->phone_number;
+        $user->nick_name=$request->nick_name;
+        $user->profile_img= '';
+        $user->type = '운영자';
+        $user->point = 0;
+        $user->save();
+        return response([
+            'status' => 'success',
+            'data' => $user
+        ], 200);
+    }
+    public function userRegister(Request $request){
+        $user = new User;
+        $user->email = $request ->email;
+        $user->password = Hash::make($request->password);
+        $user->name = $request->name;
+        $user->phone_number = $request->phone_number;
+        $user->nick_name=$request->nick_name;
+        $user->profile_img= '';
+        $user->type = '사용자';
+        $user->point = 0;
         $user->save();
         return response([
             'status' => 'success',
@@ -70,6 +87,18 @@ class JWTAuthController extends Controller
     public function me()
     {
         return response()->json(auth()->user());
+    }
+
+    public function check()
+    {
+
+        if (auth()->user()==null) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        return response([
+            'status' => 'success',
+        ], 200);
     }
 
     /**
