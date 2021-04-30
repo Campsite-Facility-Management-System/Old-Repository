@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CampsiteController;
+use App\Http\Controllers\MqttController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,3 +38,5 @@ Route::group([
 Route::post('campsite/manager/add',[CampSiteController::class,'create']);
 Route::post('campsite/manager/list',[CampSiteController::class,'ownCampsiteList']);
 
+//Route::get('/mqtt/publish/{topic}/{message}', [MqttController::class,'publishMqtt']);
+//Route::get('/mqtt/subscriber/{topic}', [MqttController::class,'subscribeMqtt']);
