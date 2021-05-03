@@ -39,4 +39,4 @@ Route::post('campsite/manager/add',[CampSiteController::class,'create']);
 Route::post('campsite/manager/list',[CampSiteController::class,'ownCampsiteList']);
 
 //Route::get('/mqtt/publish/{topic}/{message}', [MqttController::class,'publishMqtt']);
-//Route::get('/mqtt/subscriber/{topic}', [MqttController::class,'subscribeMqtt']);
+Route::get('/mqtt/subscriber/{topic}', [MqttController::class,'subscribeMqtt']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PhpMqtt\Client\Facades\MQTT;
+use App\Jobs\MqttSubscriber;
 
 class MqttController extends Controller
 {
@@ -18,18 +19,11 @@ class MqttController extends Controller
             return response()->json('error', 404);
         
     }
-   
+  
     public function subscribeMqtt(Request $request,$topic){
 
-        $mqtt = MQTT::connection();
-        $mqtt->subscribe($topic, function (string $topic, string $message) use ($mqtt, &$result) {
-            $result['topic'] = $topic;
-            $result['message'] = $message;
-            Log::info($message);
-            //$mqtt->interrupt();
-        }, 1);
-        $mqtt->loop(true);
-        return response()->json($result, 200);
+        MqttSubscriber::dispatch();
+        return response()->json('dd', 200);
     }
-
+    
 }
