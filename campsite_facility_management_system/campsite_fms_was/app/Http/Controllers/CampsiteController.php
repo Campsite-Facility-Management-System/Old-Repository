@@ -14,14 +14,14 @@ class CampsiteController extends Controller
 {
    public function create(Request $request){
     try {
-        if(JWTAuth::parseToken()->authenticate()->type->type === "운영자"){
+        if(JWTAuth::parseToken()->authenticate()->type === "운영자"){
             $campsite = new Campsite;
             $campsite->owner_id = JWTAuth::parseToken()->authenticate()->email; 
             $campsite->name = $request->name;
             $campsite->telephone = $request->telephone;
             $campsite->address = $request->address;
             $campsite->description = $request->description;
-            $campsite->save();
+
             for($i=0; $i<count($request->img);$i++){
                 $img = new Image;
                 $img->img_file_name = Storage::put('/public/img',$request->img[$i]);
@@ -30,7 +30,7 @@ class CampsiteController extends Controller
                 $img->index = $campsite->id;
                 $img->save();
             }
-            
+            $campsite->save();            
             return response([
                 'status' => 'success',
             ], 200);
@@ -63,7 +63,7 @@ class CampsiteController extends Controller
                 $campsite[$i]->img_url=$url["img_url"];
             }
             
-            return response()->json($campsite);
+            return response()->json($campsite,200,[],)->setEncodingOptions(JSON_UNESCAPED_UNICODE) ;
         }
         return response()->json(['error' => 'Unauthorized'], 401);
     
