@@ -6,6 +6,7 @@ use App\Http\Controllers\JWTAuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CampsiteController;
 use App\Http\Controllers\MqttController;
+use App\Http\Controllers\DeviceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -38,5 +39,15 @@ Route::group([
 Route::post('campsite/manager/add',[CampSiteController::class,'create']);
 Route::post('campsite/manager/list',[CampSiteController::class,'ownCampsiteList']);
 
+Route::post('category/manager/add',[CampSiteController::class,'categoryCreate']);
+Route::post('category/manager/list',[CampSiteController::class,'categoryList']);
+
+Route::post('device/manager/add',[CampSiteController::class,'deviceCreate']);
+Route::post('device/manager/list',[CampSiteController::class,'deviceList']);
+
+Route::post('device/manager/controll',[DeviceController::class,'deviceControll']);
+
+Route::post('device/manager/energy/usage',[DeviceController::class,'energyUsage']);
+Route::post('device/manager/energy/chart',[DeviceController::class,'energyChart']);
 //Route::get('/mqtt/publish/{topic}/{message}', [MqttController::class,'publishMqtt']);
-Route::get('/mqtt/subscriber/{topic}', [MqttController::class,'subscribeMqtt']);
+Route::get('/mqtt/subscriber/start', [MqttController::class,'subscribeMqtt']);

@@ -20,10 +20,9 @@ class MqttController extends Controller
         
     }
   
-    public function subscribeMqtt(Request $request,$topic){
-
+    public function subscribeMqtt(Request $request){
         MqttSubscriber::dispatch();
-        return response()->json('dd', 200);
+        return response()->json('starting!', 200);
     }
     
 }
