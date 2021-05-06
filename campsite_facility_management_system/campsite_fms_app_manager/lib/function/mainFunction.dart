@@ -1,7 +1,7 @@
-import 'package:campsite_fms_app_manager/screen/controll/ctrlPage.dart';
-import 'package:campsite_fms_app_manager/screen/homePage/homePage.dart';
-import 'package:campsite_fms_app_manager/screen/more/morePage.dart';
-import 'package:campsite_fms_app_manager/screen/notification/notiPage.dart';
+import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/homePageScreen.dart';
+import 'package:campsite_fms_app_manager/screen/more/morePageScreen.dart';
+import 'package:campsite_fms_app_manager/screen/notification/notiPageScreen.dart';
 import 'package:flutter/material.dart';
 
 class MainFunction extends StatefulWidget {
@@ -19,7 +19,7 @@ class _MainFunctionState extends State<MainFunction> {
         index: currentPage,
         children: [
           HomePageScreen(),
-          CtrlPageScreen(),
+          ElectricScreen(),
           NotiPageScreen(),
           MorePageScreen(),
         ],

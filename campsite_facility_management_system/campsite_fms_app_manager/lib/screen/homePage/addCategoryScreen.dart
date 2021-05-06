@@ -5,34 +5,54 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+List<dynamic> imageList = List(6);
+
 class AddCategoryScreen extends StatefulWidget {
   @override
   AddCategoryScreenState createState() => AddCategoryScreenState();
 }
 
 class AddCategoryScreenState extends State<AddCategoryScreen> {
-  TextEditingController _name;
-  TextEditingController _price;
-  TextEditingController _info;
+  TextEditingController _name = new TextEditingController();
+  TextEditingController _price = new TextEditingController();
+  TextEditingController _info = new TextEditingController();
 
   final token = new FlutterSecureStorage();
 
-  // upload() async {
-  //   var url = Env.url + '/api/auth/campsite';
-  //   var response = await http.post(url, body: {
-  //     'name': _name,
-  //     'price': _price,
-  //     'info': _info,
-  //   });
+  upload() async {
+    var url = Env.url + '/api/category/manager/add';
+    String value = await token.read(key: 'token');
+    String myToken = ("Bearer " + value);
 
-  //   if (response.statusCode == 200) {
-  //     //print("success");
-  //     Navigator.pushNamed(context, '/mainFunction');
-  //   } else if (response.statusCode == 401) {
-  //     // print("login error");
-  //     Navigator.pushNamed(context, '/login');
-  //   }
-  // }
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll({'Authorization': myToken});
+    request.fields.addAll({
+      // 'campsite_id':
+      'name': _name.text,
+      'price': _price.text,
+      'info': _info.text,
+    });
+
+    for (int i = 0; i < 6; i++) {
+      if (imageList[i] != null) {
+        request.files
+            .add(await http.MultipartFile.fromPath('img[]', imageList[i]));
+      }
+    }
+    var response = await request.send();
+    print(request.headers);
+    print(request.fields);
+    print(request.files);
+
+    print(response.statusCode);
+    print(await response.stream.bytesToString());
+    if (response.statusCode == 200) {
+      print("success");
+      Navigator.pushNamed(context, '/campDetail');
+    } else if (response.statusCode == 401) {
+      print("error");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +80,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                 Container(
                   width: 350,
                   height: 200,
-                  child: AddPicture(350, 250),
+                  child: AddPicture(350, 250, 0),
                 ),
                 SizedBox(
                   height: 20,
@@ -75,7 +95,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50),
+                      child: AddPicture(50, 50, 1),
                     ),
                     SizedBox(
                       width: 20,
@@ -83,7 +103,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50),
+                      child: AddPicture(50, 50, 2),
                     ),
                     SizedBox(
                       width: 20,
@@ -91,7 +111,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50),
+                      child: AddPicture(50, 50, 3),
                     ),
                     SizedBox(
                       width: 20,
@@ -99,7 +119,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50),
+                      child: AddPicture(50, 5, 4),
                     ),
                     SizedBox(
                       width: 20,
@@ -107,7 +127,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50),
+                      child: AddPicture(50, 50, 5),
                     ),
                   ],
                 ),
@@ -174,7 +194,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                   height: 10,
                 ),
                 RaisedButton(
-                  onPressed: null,
+                  onPressed: () => upload(),
                   child: Text('등록하기'),
                 ),
               ],

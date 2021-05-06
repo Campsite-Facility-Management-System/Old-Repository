@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:campsite_fms_app_manager/env.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+List<dynamic> imageList = List(6);
 
 class AddCampScreen extends StatefulWidget {
   @override
@@ -16,24 +19,49 @@ class AddCampScreenState extends State<AddCampScreen> {
   TextEditingController _name = new TextEditingController();
   TextEditingController _addr = new TextEditingController();
   TextEditingController _phone = new TextEditingController();
-  TextEditingController _intro = new TextEditingController();
+  TextEditingController _info = new TextEditingController();
   final token = new FlutterSecureStorage();
 
+  getimage(imagePath, index) {
+    imageList[index] = imagePath;
+
+    for (int i = 0; i < 6; i++) {
+      print("index: " + i.toString() + " : " + imageList[i].toString());
+    }
+  }
+
   upload() async {
-    var url = Env.url + '/api/auth/campsite';
-    var response = await http.post(url, body: {
-      'name': _name,
-      'address': _addr,
-      'telephone': _phone,
-      'description': _intro,
+    var url = Env.url + '/api/campsite/manager/add';
+    String value = await token.read(key: 'token');
+    String myToken = ("Bearer " + value);
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll({'Authorization': myToken});
+    request.fields.addAll({
+      'name': _name.text,
+      'telephone': _phone.text,
+      'address': _addr.text,
+      'description': _info.text,
     });
 
+    for (int i = 0; i < 6; i++) {
+      if (imageList[i] != null) {
+        request.files
+            .add(await http.MultipartFile.fromPath('img[]', imageList[i]));
+      }
+    }
+    var response = await request.send();
+    print(request.headers);
+    print(request.fields);
+    print(request.files);
+
+    print(response.statusCode);
+    print(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      //print("success");
-      Navigator.pushNamed(context, '/mainFunction');
+      print("success");
+      Navigator.pushNamed(context, '/homePage');
     } else if (response.statusCode == 401) {
-      // print("login error");
-      Navigator.pushNamed(context, '/login');
+      print("error");
     }
   }
 
@@ -62,7 +90,7 @@ class AddCampScreenState extends State<AddCampScreen> {
               Container(
                 width: 350,
                 height: 200,
-                child: AddPicture(350, 200),
+                child: AddPicture(350, 200, 0),
               ),
               SizedBox(
                 height: 20,
@@ -77,7 +105,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50),
+                    child: AddPicture(50, 50, 1),
                   ),
                   SizedBox(
                     width: 20,
@@ -85,7 +113,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50),
+                    child: AddPicture(50, 50, 2),
                   ),
                   SizedBox(
                     width: 20,
@@ -93,7 +121,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50),
+                    child: AddPicture(50, 50, 3),
                   ),
                   SizedBox(
                     width: 20,
@@ -101,7 +129,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50),
+                    child: AddPicture(50, 50, 4),
                   ),
                   SizedBox(
                     width: 20,
@@ -109,7 +137,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50),
+                    child: AddPicture(50, 50, 5),
                   ),
                 ],
               ),
@@ -178,7 +206,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                         maxLines: 5,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(), hintText: '캠핑장 소개'),
-                        controller: _intro,
+                        controller: _info,
                       ),
                     ],
                   ),
@@ -188,7 +216,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                 height: 10,
               ),
               RaisedButton(
-                onPressed: null,
+                onPressed: () => upload(),
                 child: Text('등록하기'),
               ),
             ],
@@ -212,7 +240,7 @@ class AddCampScreenState extends State<AddCampScreen> {
             child: Image.file(
               image.data,
               fit: BoxFit.fill,
-            ),
+            ),@
           );
         } else {
           return Text(

@@ -1,4 +1,7 @@
+import 'package:campsite_fms_app_manager/env.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
 
 class AddDeviceScreen extends StatefulWidget {
   @override
@@ -8,6 +11,35 @@ class AddDeviceScreen extends StatefulWidget {
 class AddDeviceScreenState extends State<AddDeviceScreen> {
   TextEditingController _uuid;
   TextEditingController _name;
+  int _category = 0;
+  final token = new FlutterSecureStorage();
+
+  upload() async {
+    var url = Env.url + '/api/campsite/manager/add';
+    String value = await token.read(key: 'token');
+    String myToken = ("Bearer " + value);
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll({'Authorization': myToken});
+    request.fields.addAll({
+      'name': _name.text,
+      'uuid': _uuid.text,
+      'category': _category.toString(),
+    });
+
+    var response = await request.send();
+    print(request.headers);
+    print(request.fields);
+
+    print(response.statusCode);
+    print(await response.stream.bytesToString());
+    if (response.statusCode == 200) {
+      print("success");
+      Navigator.pushNamed(context, '/campDetail');
+    } else if (response.statusCode == 401) {
+      print("error");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +124,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                   height: 10,
                 ),
                 RaisedButton(
-                  onPressed: null,
+                  onPressed: () => upload(),
                   child: Text('등록하기'),
                 ),
               ],

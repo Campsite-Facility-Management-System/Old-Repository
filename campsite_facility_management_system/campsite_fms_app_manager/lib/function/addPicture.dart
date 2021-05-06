@@ -1,10 +1,12 @@
+import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class AddPicture extends StatefulWidget {
   final double width, height;
-  const AddPicture(this.width, this.height);
+  final int index;
+  const AddPicture(this.width, this.height, this.index);
 
   @override
   AddPictureState createState() => AddPictureState();
@@ -12,6 +14,7 @@ class AddPicture extends StatefulWidget {
 
 class AddPictureState extends State<AddPicture> {
   File _image;
+  final addCamp = new AddCampScreenState();
 
   getImage() async {
     File image = await ImagePicker.pickImage(
@@ -19,6 +22,10 @@ class AddPictureState extends State<AddPicture> {
     setState(() {
       _image = image;
     });
+
+    addCamp.getimage(_image.path, widget.index);
+
+    // print("imagePath: " + _image.path);
   }
 
   showImage(context) {
