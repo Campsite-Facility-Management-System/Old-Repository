@@ -9,8 +9,6 @@ import 'dart:convert';
 class DeviceTile {
   static Widget buildTile(context, item) => Container(
         child: Container(
-          margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          padding: EdgeInsets.only(left: 20, right: 20, top: 25),
           decoration: BoxDecoration(
             border: Border.all(width: 1),
             borderRadius: BorderRadius.all(
@@ -20,10 +18,10 @@ class DeviceTile {
           child: Column(
             children: <Widget>[
               ListTile(
-                title: Text(item['name']),
+                title: Text("기기명: " + item['name']),
               ),
               ListTile(
-                title: Text(item['uuid']),
+                title: Text("uuid: " + item['uuid']),
               ),
             ],
           ),

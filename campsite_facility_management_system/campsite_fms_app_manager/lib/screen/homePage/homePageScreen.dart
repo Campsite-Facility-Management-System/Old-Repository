@@ -49,6 +49,7 @@ class HomePageScreenState extends State<HomePageScreen> {
           Navigator.pushNamed(context, '/addCamp');
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.green,
       ),
     );
   }

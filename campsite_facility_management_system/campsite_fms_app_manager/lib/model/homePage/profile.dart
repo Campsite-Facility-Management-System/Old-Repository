@@ -21,7 +21,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                   height: 50,
                 ),
                 Container(
-                  color: Colors.blue,
+                  color: Colors.green,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

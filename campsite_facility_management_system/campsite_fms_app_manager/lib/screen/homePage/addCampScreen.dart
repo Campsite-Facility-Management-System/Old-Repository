@@ -90,7 +90,7 @@ class AddCampScreenState extends State<AddCampScreen> {
               Container(
                 width: 350,
                 height: 200,
-                child: AddPicture(350, 200, 0),
+                child: AddPicture(350, 200, 0, 1),
               ),
               SizedBox(
                 height: 20,
@@ -105,7 +105,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50, 1),
+                    child: AddPicture(50, 50, 1, 1),
                   ),
                   SizedBox(
                     width: 20,
@@ -113,7 +113,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50, 2),
+                    child: AddPicture(50, 50, 2, 1),
                   ),
                   SizedBox(
                     width: 20,
@@ -121,7 +121,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50, 3),
+                    child: AddPicture(50, 50, 3, 1),
                   ),
                   SizedBox(
                     width: 20,
@@ -129,7 +129,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50, 4),
+                    child: AddPicture(50, 50, 4, 1),
                   ),
                   SizedBox(
                     width: 20,
@@ -137,7 +137,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                   Container(
                     width: 50,
                     height: 50,
-                    child: AddPicture(50, 50, 5),
+                    child: AddPicture(50, 50, 5, 1),
                   ),
                 ],
               ),

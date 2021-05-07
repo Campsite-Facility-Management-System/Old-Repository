@@ -10,8 +10,11 @@ import 'dart:convert';
 class CategoryTile {
   static Widget buildTile(context, item) => Container(
         child: Container(
-          margin: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          padding: EdgeInsets.only(left: 20, right: 20, top: 25),
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+          padding: EdgeInsets.only(
+            left: 5,
+            right: 5,
+          ),
           decoration: BoxDecoration(
             border: Border.all(width: 1),
             borderRadius: BorderRadius.all(
@@ -21,10 +24,38 @@ class CategoryTile {
           child: Column(
             children: <Widget>[
               ListTile(
-                title: Text(item['name']),
+                title: Text('카테고리명: ' + item['name']),
               ),
               ListTile(
-                title: DeviceList(item['category']),
+                title: new CachedNetworkImage(
+                  imageBuilder:
+                      (BuildContext context, ImageProvider imageProvider) {
+                    return AspectRatio(
+                      aspectRatio: 1,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 0.5, color: Colors.black12),
+                          shape: BoxShape.rectangle,
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  imageUrl: Env.url + item['img_url'],
+                  placeholder: (context, url) => Container(
+                    height: 500,
+                    child: SizedBox(
+                      height: 300,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => new Icon(Icons.error),
+                ),
+              ),
+              ListTile(
+                title: DeviceList(item['id']),
               )
             ],
           ),

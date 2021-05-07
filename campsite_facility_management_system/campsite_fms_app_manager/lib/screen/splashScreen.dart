@@ -36,9 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: InkWell(
         child: Center(
-          child: Lottie.network(
-            'https://assets3.lottiefiles.com/packages/lf20_mb3hpfox.json',
-          ),
+          child: Lottie.asset('asset/lottie/splash.json'),
         ),
       ),
     );

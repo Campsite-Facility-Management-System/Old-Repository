@@ -1,9 +1,13 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/addPicture.dart';
+import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
+import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:provider/provider.dart';
 
 List<dynamic> imageList = List(6);
 
@@ -15,9 +19,21 @@ class AddCategoryScreen extends StatefulWidget {
 class AddCategoryScreenState extends State<AddCategoryScreen> {
   TextEditingController _name = new TextEditingController();
   TextEditingController _price = new TextEditingController();
-  TextEditingController _info = new TextEditingController();
+  TextEditingController _description = new TextEditingController();
+  TextEditingController _max_car_num = new TextEditingController();
+  TextEditingController _max_adult_num = new TextEditingController();
+  TextEditingController _max_children_num = new TextEditingController();
+  TextEditingController _max_energy = new TextEditingController();
 
   final token = new FlutterSecureStorage();
+
+  getimage(imagePath, index) {
+    imageList[index] = imagePath;
+
+    for (int i = 0; i < 6; i++) {
+      print("index: " + i.toString() + " : " + imageList[i].toString());
+    }
+  }
 
   upload() async {
     var url = Env.url + '/api/category/manager/add';
@@ -27,10 +43,16 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers.addAll({'Authorization': myToken});
     request.fields.addAll({
-      // 'campsite_id':
+      'campsite_id': Provider.of<IdCollector>(context, listen: true)
+          .selectedCampId
+          .toString(),
       'name': _name.text,
       'price': _price.text,
-      'info': _info.text,
+      'description': _description.text,
+      'max_car_num': _max_car_num.text,
+      'max_adult_num': _max_adult_num.text,
+      'max_children_num': _max_children_num.text,
+      'max_energy': _max_energy.text
     });
 
     for (int i = 0; i < 6; i++) {
@@ -48,7 +70,10 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
     print(await response.stream.bytesToString());
     if (response.statusCode == 200) {
       print("success");
-      Navigator.pushNamed(context, '/campDetail');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CampDetailScreen()),
+      ).then((value) => setState(() {}));
     } else if (response.statusCode == 401) {
       print("error");
     }
@@ -80,7 +105,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                 Container(
                   width: 350,
                   height: 200,
-                  child: AddPicture(350, 250, 0),
+                  child: AddPicture(350, 250, 0, 2),
                 ),
                 SizedBox(
                   height: 20,
@@ -95,7 +120,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50, 1),
+                      child: AddPicture(50, 50, 1, 2),
                     ),
                     SizedBox(
                       width: 20,
@@ -103,7 +128,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50, 2),
+                      child: AddPicture(50, 50, 2, 2),
                     ),
                     SizedBox(
                       width: 20,
@@ -111,7 +136,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50, 3),
+                      child: AddPicture(50, 50, 3, 2),
                     ),
                     SizedBox(
                       width: 20,
@@ -119,7 +144,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 5, 4),
+                      child: AddPicture(50, 5, 4, 2),
                     ),
                     SizedBox(
                       width: 20,
@@ -127,7 +152,7 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                     Container(
                       width: 50,
                       height: 50,
-                      child: AddPicture(50, 50, 5),
+                      child: AddPicture(50, 50, 5, 2),
                     ),
                   ],
                 ),
@@ -181,7 +206,74 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: '카테고리 설명'),
-                          controller: _info,
+                          controller: _description,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text('최대 차량 수'),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: '최대 차량 수'),
+                          controller: _max_car_num,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text('최대 성인 수'),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: '최대 성인 수'),
+                          controller: _max_adult_num,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text('최대 미성년자 수'),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: '최대 미성년자 수'),
+                          controller: _max_children_num,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            Text('최대 부하량'),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), hintText: '최대 부하량'),
+                          controller: _max_energy,
                         ),
                         SizedBox(
                           height: 5,

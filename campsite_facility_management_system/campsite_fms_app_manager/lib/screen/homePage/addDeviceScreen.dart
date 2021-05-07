@@ -1,7 +1,9 @@
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class AddDeviceScreen extends StatefulWidget {
   @override
@@ -9,13 +11,14 @@ class AddDeviceScreen extends StatefulWidget {
 }
 
 class AddDeviceScreenState extends State<AddDeviceScreen> {
-  TextEditingController _uuid;
-  TextEditingController _name;
-  int _category = 0;
+  TextEditingController _uuid = new TextEditingController();
+  TextEditingController _name = new TextEditingController();
   final token = new FlutterSecureStorage();
+  var selected;
+  var selectedIndex;
 
   upload() async {
-    var url = Env.url + '/api/campsite/manager/add';
+    var url = Env.url + '/api/device/manager/add';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
@@ -24,7 +27,10 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
     request.fields.addAll({
       'name': _name.text,
       'uuid': _uuid.text,
-      'category': _category.toString(),
+      'category_id': selectedIndex.toString(),
+      'campsite_id': Provider.of<IdCollector>(context, listen: true)
+          .selectedCampId
+          .toString(),
     });
 
     var response = await request.send();
@@ -43,6 +49,12 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // List ciList = Provider.of<IdCollector>(context, listen: true).ciList;
+    // List cnList = Provider.of<IdCollector>(context, listen: true).cnList;
+    //selected = cnList[0];
+    Map<String, int> cMap =
+        Provider.of<IdCollector>(context, listen: true).cMap;
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -109,13 +121,25 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                         SizedBox(
                           height: 5,
                         ),
-                        Card(
-                          child: ListTile(
-                            title: Text('카테고리 추가'),
-                            trailing: Icon(Icons.arrow_drop_down),
-                            onTap: () => {},
-                          ),
-                        )
+                        DropdownButton(
+                          value: selected,
+                          items: cMap.keys.map(
+                            (value) {
+                              return DropdownMenuItem(
+                                value: value,
+                                child: Text(value),
+                              );
+                            },
+                          ).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selected = value;
+                              selectedIndex = cMap[selected];
+                              print("selected: " + selected);
+                              print(cMap[selected]);
+                            });
+                          },
+                        ),
                       ],
                     ),
                   ),

@@ -25,7 +25,7 @@ class _MainFunctionState extends State<MainFunction> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
+        color: Colors.green,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[

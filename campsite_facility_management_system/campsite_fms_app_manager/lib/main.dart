@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/function/searchFunction.dart';
+import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCategoryScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
@@ -11,9 +12,15 @@ import 'package:campsite_fms_app_manager/screen/sign/signUpScreen.dart';
 import 'package:campsite_fms_app_manager/screen/splashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider<IdCollector>(
+      create: (context) => IdCollector(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

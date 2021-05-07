@@ -33,11 +33,11 @@ class CampListState extends State<CampList> {
       list = jsonDecode(d) as List;
     });
 
-    print(list.length);
+    // print(list.length);
 
-    for (int i = 0; i < list.length; i++) {
-      print('index: ' + i.toString() + list[i].toString());
-    }
+    // for (int i = 0; i < list.length; i++) {
+    //   print('index: ' + i.toString() + list[i].toString());
+    // }
   }
 
   @override
@@ -50,12 +50,12 @@ class CampListState extends State<CampList> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10),
-      height: 610,
+      height: 620,
       child: ListView.builder(
         itemCount: list == null ? 0 : list?.length,
         itemBuilder: (context, index) {
-          print("index: " + index.toString());
-          print("list index: " + list[index].toString());
+          // print("index: " + index.toString());
+          // print("list index: " + list[index].toString());
           return MyCamp.buildTile(context, list[index]);
         },
       ),

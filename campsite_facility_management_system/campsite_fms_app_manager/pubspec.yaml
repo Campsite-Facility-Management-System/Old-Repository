@@ -30,6 +30,8 @@ dependencies:
   lottie: ^0.7.0+1
   image_picker: ^0.6.7+17
   cached_network_image: ^2.5.1
+  provider: ^3.2.0
+  fl_chart: ^0.12.3
 
 
 
@@ -51,6 +53,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+   - 'asset/lottie/splash.json'
 
   # To add assets to your application, add an assets section, like this:
   # assets:

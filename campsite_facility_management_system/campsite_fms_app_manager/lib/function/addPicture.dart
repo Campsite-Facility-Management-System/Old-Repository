@@ -1,4 +1,6 @@
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addCategoryScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -6,7 +8,8 @@ import 'dart:io';
 class AddPicture extends StatefulWidget {
   final double width, height;
   final int index;
-  const AddPicture(this.width, this.height, this.index);
+  final int type;
+  const AddPicture(this.width, this.height, this.index, this.type);
 
   @override
   AddPictureState createState() => AddPictureState();
@@ -15,6 +18,7 @@ class AddPicture extends StatefulWidget {
 class AddPictureState extends State<AddPicture> {
   File _image;
   final addCamp = new AddCampScreenState();
+  final addCategory = new AddCategoryScreenState();
 
   getImage() async {
     File image = await ImagePicker.pickImage(
@@ -23,7 +27,12 @@ class AddPictureState extends State<AddPicture> {
       _image = image;
     });
 
-    addCamp.getimage(_image.path, widget.index);
+    //camp=1, category=2
+    if (widget.type == 1) {
+      addCamp.getimage(_image.path, widget.index);
+    } else if (widget.type == 2) {
+      addCategory.getimage(_image.path, widget.index);
+    }
 
     // print("imagePath: " + _image.path);
   }

@@ -3,10 +3,13 @@ import 'package:campsite_fms_app_manager/model/homePage/camp/campData.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/model/homePage/device/deviceTile.dart';
 import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
+import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 class DeviceList extends StatefulWidget {
   final int category;
@@ -25,14 +28,22 @@ class DeviceListstate extends State<DeviceList> {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
+    print("widget.category: " + widget.category.toString());
+    print("campsite_id: " +
+        Provider.of<IdCollector>(context, listen: true)
+            .selectedCampId
+            .toString());
     var response = await http.post(url, headers: {
       'Authorization': myToken,
     }, body: {
-      'category': widget.category,
+      'campsite_id': Provider.of<IdCollector>(context, listen: true)
+          .selectedCampId
+          .toString(),
+      'category_id': widget.category.toString(),
     });
 
     var data = utf8.decode(response.bodyBytes);
-
+    print(data);
     setState(() {
       deviceList = jsonDecode(data) as List;
     });
