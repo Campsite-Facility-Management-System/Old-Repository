@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/model/electric/graphData.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:provider/provider.dart';
 
 class ElectricGraph extends StatefulWidget {
   @override
@@ -35,8 +38,9 @@ class ElectricGraphState extends State<ElectricGraph> {
       // print(spot.toString());
       for (int i = 0; i < 5; i++) {
         leftTitle.add((gd["max"] / 4 * i).round());
-        print(leftTitle);
       }
+      Provider.of<GraphData>(context, listen: true).setMax(gd["max"]);
+      Provider.of<GraphData>(context, listen: true).setElectricity(spot);
     });
   }
 
@@ -54,6 +58,8 @@ class ElectricGraphState extends State<ElectricGraph> {
     // TODO: implement initState
     super.initState();
     _getData();
+    const duration = const Duration(seconds: 10);
+    new Timer.periodic(duration, (Timer t) => _getData());
   }
 
   @override
@@ -65,7 +71,11 @@ class ElectricGraphState extends State<ElectricGraph> {
         child: Padding(
           padding: EdgeInsets.only(right: 15, top: 20),
           child: LineChart(
-            usageChart(makeSpot(), gd["max"], leftTitle),
+            usageChart(
+                makeSpot(),
+                Provider.of<GraphData>(context, listen: true).max,
+                leftTitle,
+                context),
           ),
         ),
       ),
@@ -73,7 +83,7 @@ class ElectricGraphState extends State<ElectricGraph> {
   }
 }
 
-LineChartData usageChart(list, max, leftTitle) {
+LineChartData usageChart(list, max, leftTitle, context) {
   List<dynamic> l = List();
   return LineChartData(
     gridData: FlGridData(
@@ -126,11 +136,10 @@ LineChartData usageChart(list, max, leftTitle) {
     minX: 0,
     maxX: 13,
     minY: 1,
-    maxY: 30,
-    // maxY: max * 1.2,
+    maxY: Provider.of<GraphData>(context, listen: true).max * 1.2,
     lineBarsData: [
       LineChartBarData(
-        spots: list,
+        spots: Provider.of<GraphData>(context, listen: true).electricity,
         isCurved: true,
         barWidth: 5,
         dotData: FlDotData(

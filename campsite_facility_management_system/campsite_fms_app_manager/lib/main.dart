@@ -1,5 +1,10 @@
 import 'package:campsite_fms_app_manager/function/searchFunction.dart';
+import 'package:campsite_fms_app_manager/model/electric/ElectricGraph.dart';
+import 'package:campsite_fms_app_manager/model/electric/ElectricInfo.dart';
+import 'package:campsite_fms_app_manager/model/electric/graphData.dart';
+import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCategoryScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
@@ -16,8 +21,16 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider<IdCollector>(
-      create: (context) => IdCollector(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => IdCollector()),
+        ChangeNotifierProvider(
+          create: (_) => UsageData(0, 0),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => GraphData(0, 0),
+        ),
+      ],
       child: MyApp(),
     ),
   );
@@ -42,6 +55,9 @@ class MyApp extends StatelessWidget {
         '/addDevice': (context) => AddDeviceScreen(),
         '/addCategory': (context) => AddCategoryScreen(),
         '/campDetail': (context) => CampDetailScreen(),
+        '/electricInfo': (context) => ElectricInfo(),
+        '/electricGraph': (context) => ElectricGraph(),
+        '/electricScreen': (contetx) => ElectricScreen(),
       },
     );
   }
