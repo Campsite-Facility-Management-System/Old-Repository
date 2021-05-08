@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,12 @@ class MyCamp {
                     Provider.of<IdCollector>(context, listen: false)
                         .setCampId(item['id']),
                     // setCampId(item['id']),
-                    Navigator.pushNamed(context, '/campDetail')
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CampDetailScreen()))
+
+                    // Navigator.pushNamed(context, '/campDetail')
                   },
                   child: Text('관리'),
                 ),

@@ -14,7 +14,8 @@ class ElectricGraph extends StatefulWidget {
 class ElectricGraphState extends State<ElectricGraph> {
   final token = new FlutterSecureStorage();
   Map gd;
-  List<FlSpot> spot;
+  List<FlSpot> spot = List();
+  List<int> leftTitle = List();
 
   Future<Null> _getData() async {
     var url = Env.url + '/api/device/manager/energy/chart';
@@ -27,19 +28,23 @@ class ElectricGraphState extends State<ElectricGraph> {
       'device_id': '1',
     });
     var data = utf8.decode(response.bodyBytes);
-    print("data: " + data.toString());
+    // print("data: " + data.toString());
     setState(() {
       gd = jsonDecode(data) as Map;
       spot = makeSpot();
-      print(spot.toString());
+      // print(spot.toString());
+      for (int i = 0; i < 5; i++) {
+        leftTitle.add((gd["max"] / 4 * i).round());
+        print(leftTitle);
+      }
     });
   }
 
   List<FlSpot> makeSpot() {
     List<FlSpot> spotList = [];
     for (int i = 1; i < 13; i++) {
-      spotList.add(FlSpot(
-          (13.0 - i).toDouble(), gd["electricity"][12 - i]["watt"].toDouble()));
+      spotList.add(
+          FlSpot(i.toDouble(), gd["electricity"][12 - i]["watt"].toDouble()));
     }
     return spotList;
   }
@@ -60,7 +65,7 @@ class ElectricGraphState extends State<ElectricGraph> {
         child: Padding(
           padding: EdgeInsets.only(right: 15, top: 20),
           child: LineChart(
-            usageChart(makeSpot(), gd["max"]),
+            usageChart(makeSpot(), gd["max"], leftTitle),
           ),
         ),
       ),
@@ -68,7 +73,8 @@ class ElectricGraphState extends State<ElectricGraph> {
   }
 }
 
-LineChartData usageChart(list, max) {
+LineChartData usageChart(list, max, leftTitle) {
+  List<dynamic> l = List();
   return LineChartData(
     gridData: FlGridData(
       show: false,
@@ -86,39 +92,42 @@ LineChartData usageChart(list, max) {
         );
       },
     ),
-    titlesData: FlTitlesData(
-      show: true,
-      bottomTitles: SideTitles(
-        showTitles: true,
-        reservedSize: 22,
-        getTitles: (value) {},
-      ),
-      leftTitles: SideTitles(
-        showTitles: true,
-        getTitles: (value) {
-          var l = (30000 / 5).toStringAsFixed(0);
-
-          if (value.toString().split('.')[0] == l.toString()) {
-            print('value: ' + value.toString().split('.')[0]);
-            return l;
-          } else if (value.toString().split('.')[0] == (l * 2).toString()) {
-            print('value: ' + value.toString().split('.')[0]);
-            return l * 2;
-          } else if (value.toString().split('.')[0] == (l * 3).toString()) {
-            print('value: ' + value.toString().split('.')[0]);
-            return l * 3;
-          }
-        },
-      ),
-    ),
+    // extraLinesData: VerticalLine(),
+    // titlesData: FlTitlesData(
+    //   show: true,
+    //   bottomTitles: SideTitles(
+    //     showTitles: true,
+    //     reservedSize: 22,
+    //     getTitles: (value) {},
+    //   ),
+    //   leftTitles:
+    // SideTitles(
+    //   showTitles: true,
+    //   getTitles: (value) {
+    //     print(value);
+    //     if (value.toInt() == leftTitle[0]) {
+    //       return value.toString();
+    //     } else if (value.toInt() == leftTitle[1]) {
+    //       return value.toString();
+    //     } else if (value.toInt() == leftTitle[2]) {
+    //       return value.toString();
+    //     } else if (value.toInt() == leftTitle[3]) {
+    //       return value.toString();
+    //     } else if (value.toInt() == leftTitle[4]) {
+    //       return value.toString();
+    //     }
+    //   },
+    // ),
+    // ),
     borderData: FlBorderData(
       show: true,
       border: Border.all(color: Colors.green, width: 1),
     ),
     minX: 0,
     maxX: 13,
-    minY: 0,
-    maxY: max * 1.5,
+    minY: 1,
+    maxY: 30,
+    // maxY: max * 1.2,
     lineBarsData: [
       LineChartBarData(
         spots: list,

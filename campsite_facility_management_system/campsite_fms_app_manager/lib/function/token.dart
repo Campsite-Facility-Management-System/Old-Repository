@@ -11,7 +11,7 @@ class Token {
     bool b = false;
     var url = Env.url + '/api/auth/check';
     String value = await token.read(key: 'token');
-    String myToken = ("Bearer" + value);
+    String myToken = "Bearer" + value.toString();
 
     var response = await http.post(url, headers: {
       'Authorization': myToken,
