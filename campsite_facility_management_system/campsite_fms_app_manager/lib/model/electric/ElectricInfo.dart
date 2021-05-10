@@ -31,10 +31,8 @@ class ElectricInfoState extends State<ElectricInfo> {
     }, body: {
       'device_id': '1'
     });
-    print("data" + response.toString());
 
     var d = utf8.decode(response.bodyBytes);
-    print("data" + d);
     setState(() {
       list = jsonDecode(d) as Map;
       Provider.of<UsageData>(context, listen: true).setUsage(list["usage"]);
@@ -47,6 +45,23 @@ class ElectricInfoState extends State<ElectricInfo> {
       // }
     });
   }
+
+  // Future<Null> getStatus() async {
+  //   var url = Env.url + '/api/device/manager/list';
+  //   String value = await token.read(key: 'token');
+  //   String myToken = ("Bearer " + value);
+
+  //   var response = await http.post(url, headers: {
+  //     'Authorization': myToken,
+  //   }, body: {
+  //     'campsite_id': '1',
+  //     'category_id': '1',
+  //   });
+
+  //   var d = utf8.decode(response.bodyBytes);
+  //   print("statusData: " + d);
+  //   setState(() {});
+  // }
 
   Future<Null> _changeStatus() async {
     var url = Env.url + '/api/device/manager/controll';
@@ -73,6 +88,7 @@ class ElectricInfoState extends State<ElectricInfo> {
   @override
   void initState() {
     super.initState();
+    // getStatus();
     getUsageData();
     const duration = const Duration(seconds: 10);
     new Timer.periodic(duration, (Timer t) => getUsageData());
