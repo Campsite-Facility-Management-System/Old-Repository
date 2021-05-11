@@ -60,9 +60,10 @@ class CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 650,
       // margin: EdgeInsets.only(left: 10, right: 10),
       child: ListView.builder(
-        shrinkWrap: true,
+        // shrinkWrap: true,
         itemCount: categoryList == null ? 0 : categoryList?.length,
         itemBuilder: (context, index) {
           // print("index: " + index.toString());

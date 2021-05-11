@@ -29,6 +29,7 @@ class ElectricScreenState extends State<ElectricScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: Colors.green,
             title: Text('기기정보'),
           ),

@@ -23,8 +23,14 @@ class CampDetailScreenState extends State<CampDetailScreen> {
           title: Text('카테고리/디바이스 목록'),
           backgroundColor: Colors.green,
         ),
-        body: Container(
-          child: CategoryList(),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                CategoryList(),
+              ],
+            ),
+          ),
         ),
         floatingActionButton: SpeedDial(
           icon: Icons.add,

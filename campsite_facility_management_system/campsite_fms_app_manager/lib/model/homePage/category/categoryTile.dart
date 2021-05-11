@@ -54,9 +54,9 @@ class CategoryTile {
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
-              // ListTile(
-              //   title: DeviceList(item['id']),
-              // )
+              ListTile(
+                title: DeviceList(item['id']),
+              )
             ],
           ),
         ),
