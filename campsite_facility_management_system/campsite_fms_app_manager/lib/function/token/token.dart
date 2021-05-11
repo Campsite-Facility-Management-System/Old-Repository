@@ -24,4 +24,8 @@ class Token {
     }
     return b;
   }
+
+  Future<bool> tokenRefresh() async {}
+
+  Future<bool> tokenDelete() async {}
 }

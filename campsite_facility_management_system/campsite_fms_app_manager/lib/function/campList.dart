@@ -52,11 +52,15 @@ class CampListState extends State<CampList> {
       margin: EdgeInsets.only(left: 10, right: 10),
       height: 620,
       child: ListView.builder(
-        itemCount: list == null ? 0 : list?.length,
+        itemCount: list == null ? 0 : list?.length + 1,
         itemBuilder: (context, index) {
+          if (index == 0) {
+            return ProfileScreen();
+          } else {
+            return MyCamp.buildTile(context, list[index - 1]);
+          }
           // print("index: " + index.toString());
           // print("list index: " + list[index].toString());
-          return MyCamp.buildTile(context, list[index]);
         },
       ),
     );

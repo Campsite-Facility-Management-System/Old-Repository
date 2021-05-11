@@ -1,4 +1,4 @@
-import 'package:campsite_fms_app_manager/function/token.dart';
+import 'package:campsite_fms_app_manager/function/token/token.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
@@ -35,9 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: InkWell(
-        child: Center(
-          child: Lottie.asset('asset/lottie/splash.json'),
-        ),
+        child: Center(),
       ),
     );
   }

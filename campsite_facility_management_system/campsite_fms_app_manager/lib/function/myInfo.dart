@@ -7,8 +7,9 @@ import 'dart:convert';
 class MyInfo {
   String nick;
   String point;
+  String img_url;
 
-  MyInfo({this.nick, this.point});
+  MyInfo({this.nick, this.point, this.img_url});
 }
 
 class Me {
@@ -27,8 +28,13 @@ class Me {
 
     Map<String, dynamic> list = jsonDecode(response.body);
 
-    //print(list);
+    print(list);
+    print("url: " + list['profile_img'].toString());
 
-    return MyInfo(nick: list['nick_name'], point: list['point'].toString());
+    return MyInfo(
+      nick: list['nick_name'],
+      point: list['point'].toString(),
+      img_url: list['profile_img'].toString(),
+    );
   }
 }

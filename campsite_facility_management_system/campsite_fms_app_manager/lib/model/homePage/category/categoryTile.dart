@@ -10,36 +10,30 @@ import 'dart:convert';
 class CategoryTile {
   static Widget buildTile(context, item) => Container(
         child: Container(
-          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
-          padding: EdgeInsets.only(
-            left: 5,
-            right: 5,
-          ),
+          margin: EdgeInsets.only(top: 10, left: 10, right: 10),
           decoration: BoxDecoration(
-            border: Border.all(width: 1),
+            border: Border.all(width: 0.2),
             borderRadius: BorderRadius.all(
-              Radius.circular(5),
+              Radius.circular(20),
             ),
           ),
           child: Column(
             children: <Widget>[
               ListTile(
-                title: Text('카테고리명: ' + item['name']),
-              ),
-              ListTile(
                 title: new CachedNetworkImage(
                   imageBuilder:
                       (BuildContext context, ImageProvider imageProvider) {
-                    return AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 0.5, color: Colors.black12),
-                          shape: BoxShape.rectangle,
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.cover,
-                          ),
+                    return Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.2, color: Colors.black12),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        shape: BoxShape.rectangle,
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     );
@@ -55,8 +49,14 @@ class CategoryTile {
                 ),
               ),
               ListTile(
-                title: DeviceList(item['id']),
-              )
+                title: Text(
+                  item['name'],
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+              // ListTile(
+              //   title: DeviceList(item['id']),
+              // )
             ],
           ),
         ),

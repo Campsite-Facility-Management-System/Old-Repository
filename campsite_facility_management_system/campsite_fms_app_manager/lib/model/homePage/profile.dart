@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/myInfo.dart';
 import 'package:flutter/material.dart';
 
@@ -11,34 +13,77 @@ class ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 50),
       child: FutureBuilder<MyInfo>(
         future: me.me(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print(snapshot.data.img_url);
             return Column(
               children: <Widget>[
-                SizedBox(
-                  height: 50,
-                ),
                 Container(
-                  color: Colors.green,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.person),
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
                       SizedBox(
-                        width: 50,
+                        width: 90,
+                        child: ListTile(
+                          title: new CachedNetworkImage(
+                            imageBuilder: (BuildContext context,
+                                ImageProvider imageProvider) {
+                              return AspectRatio(
+                                aspectRatio: 1,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 0.5, color: Colors.black12),
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            imageUrl: Env.url + snapshot.data.img_url,
+                            placeholder: (context, url) => Container(
+                              height: 100,
+                              width: 100,
+                            ),
+                            errorWidget: (context, url, error) =>
+                                new Icon(Icons.error),
+                          ),
+                        ),
                       ),
-                      Column(
-                        children: [
-                          Text(snapshot.data.nick),
-                          Text('포인트: ' + snapshot.data.point + ' Point'),
-                        ],
+                      SizedBox(
+                        width: 5,
                       ),
-                      SizedBox(width: 50),
+                      SizedBox(
+                        width: 150,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snapshot.data.nick,
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            Text(
+                              '포인트: ' + snapshot.data.point + ' Point',
+                              style: TextStyle(fontSize: 17),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 30),
                       RaisedButton(
-                        onPressed: null, //편집 페이지 완성 후 연결해야함
-                        child: Text('편집'),
+                        color: Colors.green,
+                        onPressed: () =>
+                            {Navigator.pushNamed(context, '/login')},
+                        child: Text(
+                          '로그아웃',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),

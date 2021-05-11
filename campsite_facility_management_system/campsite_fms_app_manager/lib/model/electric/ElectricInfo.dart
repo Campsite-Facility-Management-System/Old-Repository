@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/function/token.dart';
+import 'package:campsite_fms_app_manager/function/token/token.dart';
 import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +21,8 @@ class ElectricInfoState extends State<ElectricInfo> {
   final token = new FlutterSecureStorage();
   bool isSwitched = false;
   Map<String, dynamic> list;
+  var deviceName;
+  var uuid;
 
   Future<Null> getUsageData() async {
     var url = Env.url + '/api/device/manager/energy/usage';
@@ -46,22 +49,29 @@ class ElectricInfoState extends State<ElectricInfo> {
     });
   }
 
-  // Future<Null> getStatus() async {
-  //   var url = Env.url + '/api/device/manager/list';
-  //   String value = await token.read(key: 'token');
-  //   String myToken = ("Bearer " + value);
+  Future<Null> getDevice() async {
+    var url = Env.url + '/api/device/manager/list';
+    String value = await token.read(key: 'token');
+    String myToken = ("Bearer " + value);
+    List<dynamic> l = List();
 
-  //   var response = await http.post(url, headers: {
-  //     'Authorization': myToken,
-  //   }, body: {
-  //     'campsite_id': '1',
-  //     'category_id': '1',
-  //   });
+    var response = await http.post(url, headers: {
+      'Authorization': myToken,
+    }, body: {
+      'campsite_id': '1',
+      'category_id': '10',
+    });
 
-  //   var d = utf8.decode(response.bodyBytes);
-  //   print("statusData: " + d);
-  //   setState(() {});
-  // }
+    var d = utf8.decode(response.bodyBytes);
+    l = jsonDecode(d) as List;
+    if (l[0]["state"] == 0) {
+      isSwitched = false;
+    } else if (l[0]["state"] == 1) {
+      isSwitched = true;
+    }
+    deviceName = l[0]["name"];
+    uuid = l[0]["uuid"];
+  }
 
   Future<Null> _changeStatus() async {
     var url = Env.url + '/api/device/manager/controll';
@@ -88,7 +98,7 @@ class ElectricInfoState extends State<ElectricInfo> {
   @override
   void initState() {
     super.initState();
-    // getStatus();
+    getDevice();
     getUsageData();
     const duration = const Duration(seconds: 10);
     new Timer.periodic(duration, (Timer t) => getUsageData());
@@ -116,17 +126,20 @@ class ElectricInfoState extends State<ElectricInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'device name',
+                      deviceName,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                       textAlign: TextAlign.left,
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Text(
-                      'uuid',
+                      '<uuid>',
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
-                      'uuid ads',
+                      uuid,
                       style: TextStyle(fontSize: 20),
                     ),
                     // data.uuid),

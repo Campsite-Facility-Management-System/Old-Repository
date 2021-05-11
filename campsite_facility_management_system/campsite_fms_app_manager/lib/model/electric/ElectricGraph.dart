@@ -135,7 +135,7 @@ LineChartData usageChart(list, max, leftTitle, context) {
     ),
     minX: 0,
     maxX: 13,
-    minY: 1,
+    minY: -5,
     maxY: Provider.of<GraphData>(context, listen: true).max * 1.2,
     lineBarsData: [
       LineChartBarData(

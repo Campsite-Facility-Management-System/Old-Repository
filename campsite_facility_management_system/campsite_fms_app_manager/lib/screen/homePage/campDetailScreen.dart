@@ -23,10 +23,8 @@ class CampDetailScreenState extends State<CampDetailScreen> {
           title: Text('카테고리/디바이스 목록'),
           backgroundColor: Colors.green,
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: CategoryList(),
-          ),
+        body: Container(
+          child: CategoryList(),
         ),
         floatingActionButton: SpeedDial(
           icon: Icons.add,
@@ -36,7 +34,7 @@ class CampDetailScreenState extends State<CampDetailScreen> {
           children: [
             SpeedDialChild(
                 child: Icon(Icons.accessibility),
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.green,
                 label: '카테고리',
                 onTap: () => Navigator.pushNamed(
                       context,

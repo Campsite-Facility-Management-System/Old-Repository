@@ -62,9 +62,9 @@ class DeviceListstate extends State<DeviceList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
-      height: 610,
       child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: deviceList == null ? 0 : deviceList?.length,
         itemBuilder: (context, index) {
           print("index: " + index.toString());

@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/deviceList.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/campData.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/model/homePage/category/categoryTile.dart';
@@ -59,9 +60,9 @@ class CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
-      height: 610,
+      // margin: EdgeInsets.only(left: 10, right: 10),
       child: ListView.builder(
+        shrinkWrap: true,
         itemCount: categoryList == null ? 0 : categoryList?.length,
         itemBuilder: (context, index) {
           // print("index: " + index.toString());
@@ -69,6 +70,8 @@ class CategoryListState extends State<CategoryList> {
 
           return CategoryTile.buildTile(context, categoryList[index]);
         },
+        // separatorBuilder: (context, index) =>
+        //     DeviceList(categoryList[index]['id'])
       ),
     );
   }

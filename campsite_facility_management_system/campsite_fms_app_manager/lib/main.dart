@@ -1,4 +1,3 @@
-import 'package:campsite_fms_app_manager/function/searchFunction.dart';
 import 'package:campsite_fms_app_manager/model/electric/ElectricGraph.dart';
 import 'package:campsite_fms_app_manager/model/electric/ElectricInfo.dart';
 import 'package:campsite_fms_app_manager/model/electric/graphData.dart';
