@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,6 +15,15 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
   TextEditingController _uuid = new TextEditingController();
   TextEditingController _name = new TextEditingController();
   final token = new FlutterSecureStorage();
+  final tokenCheck = Token();
+
+  _check() async {
+    bool result = await tokenCheck.tokenCheck();
+    if (!result) {
+      Navigator.pushNamed(context, '/login');
+    }
+  }
+
   var selected;
   var selectedIndex;
 
@@ -34,17 +44,24 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
     });
 
     var response = await request.send();
-    print(request.headers);
-    print(request.fields);
+    // print(request.headers);
+    // print(request.fields);
 
-    print(response.statusCode);
-    print(await response.stream.bytesToString());
+    // print(response.statusCode);
+    // print(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      print("success");
+      // print("success");
       Navigator.pushNamed(context, '/campDetail');
     } else if (response.statusCode == 401) {
-      print("error");
+      // print("error");
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _check();
   }
 
   @override

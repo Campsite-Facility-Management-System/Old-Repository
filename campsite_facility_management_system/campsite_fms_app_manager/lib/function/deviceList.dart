@@ -28,11 +28,11 @@ class DeviceListstate extends State<DeviceList> {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    print("widget.category: " + widget.category.toString());
-    print("campsite_id: " +
-        Provider.of<IdCollector>(context, listen: true)
-            .selectedCampId
-            .toString());
+    // print("widget.category: " + widget.category.toString());
+    // print("campsite_id: " +
+    //     Provider.of<IdCollector>(context, listen: true)
+    //         .selectedCampId
+    //         .toString());
     var response = await http.post(url, headers: {
       'Authorization': myToken,
     }, body: {
@@ -43,14 +43,14 @@ class DeviceListstate extends State<DeviceList> {
     });
 
     var data = utf8.decode(response.bodyBytes);
-    print(data);
+    // print(data);
     setState(() {
       deviceList = jsonDecode(data) as List;
     });
 
-    for (int i = 0; i < deviceList.length; i++) {
-      print('index: ' + i.toString() + deviceList[i].toString());
-    }
+    // for (int i = 0; i < deviceList.length; i++) {
+    //   print('index: ' + i.toString() + deviceList[i].toString());
+    // }
   }
 
   @override
@@ -67,8 +67,8 @@ class DeviceListstate extends State<DeviceList> {
         physics: NeverScrollableScrollPhysics(),
         itemCount: deviceList == null ? 0 : deviceList?.length,
         itemBuilder: (context, index) {
-          print("index: " + index.toString());
-          print("list index: " + deviceList[index].toString());
+          // print("index: " + index.toString());
+          // print("list index: " + deviceList[index].toString());
           return DeviceTile.buildTile(context, deviceList[index]);
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/addPicture.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
@@ -24,8 +25,15 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
   TextEditingController _max_adult_num = new TextEditingController();
   TextEditingController _max_children_num = new TextEditingController();
   TextEditingController _max_energy = new TextEditingController();
-
   final token = new FlutterSecureStorage();
+  final tokenCheck = Token();
+
+  _check() async {
+    bool result = await tokenCheck.tokenCheck();
+    if (!result) {
+      Navigator.pushNamed(context, '/login');
+    }
+  }
 
   getimage(imagePath, index) {
     imageList[index] = imagePath;
@@ -62,12 +70,12 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
       }
     }
     var response = await request.send();
-    print(request.headers);
-    print(request.fields);
-    print(request.files);
+    // print(request.headers);
+    // print(request.fields);
+    // print(request.files);
 
-    print(response.statusCode);
-    print(await response.stream.bytesToString());
+    // print(response.statusCode);
+    // print(await response.stream.bytesToString());
     if (response.statusCode == 200) {
       print("success");
       Navigator.push(
@@ -75,8 +83,15 @@ class AddCategoryScreenState extends State<AddCategoryScreen> {
         MaterialPageRoute(builder: (context) => CampDetailScreen()),
       ).then((value) => setState(() {}));
     } else if (response.statusCode == 401) {
-      print("error");
+      // print("error");
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _check();
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/function/campList.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/function/campList.dart';
 import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
@@ -17,6 +18,14 @@ class HomePageScreen extends StatefulWidget {
 
 class HomePageScreenState extends State<HomePageScreen> {
   final token = new FlutterSecureStorage();
+  final tokenCheck = Token();
+
+  _check() async {
+    bool result = await tokenCheck.tokenCheck();
+    if (!result) {
+      Navigator.pushNamed(context, '/login');
+    }
+  }
   // final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   // static DateTime pressBack;
 
@@ -38,6 +47,13 @@ class HomePageScreenState extends State<HomePageScreen> {
   //     return true;
   //   }
   // }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _check();
+  }
 
   @override
   Widget build(BuildContext context) {

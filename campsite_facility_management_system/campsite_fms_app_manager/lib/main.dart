@@ -41,9 +41,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '모닥모닥',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/mainFunction',
       routes: {
-        '/': (context) => SplashScreen(),
+        // '/': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/signIn': (context) => SignUpScreen(),
         '/mainFunction': (context) => MainFunction(),

@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/myInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -10,6 +13,31 @@ class ProfileScreen extends StatefulWidget {
 
 class ProfileScreenState extends State<ProfileScreen> {
   final me = Me();
+  final token = new FlutterSecureStorage();
+
+  Future<bool> logout() async {
+    var url = Env.url + '/api/auth/logout';
+    String value = await token.read(key: 'token');
+    String myToken = "Bearer" + value.toString();
+
+    var response = await http.post(url, headers: {
+      'Authorization': myToken,
+    });
+
+    // print('tokenTest(myToken): ' + myToken);
+    // print('tokenTest(response.body): ' + response.body);
+
+    var data = jsonDecode(response.body);
+    // print(data['status']);
+
+    if (data['message'] == 'Successfully logged out') {
+      print("logout success");
+      Navigator.pushNamed(context, '/login');
+    } else {
+      print("logout error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +46,6 @@ class ProfileScreenState extends State<ProfileScreen> {
         future: me.me(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data.img_url);
             return Column(
               children: <Widget>[
                 Container(
@@ -78,8 +105,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       SizedBox(width: 30),
                       RaisedButton(
                         color: Colors.green,
-                        onPressed: () =>
-                            {Navigator.pushNamed(context, '/login')},
+                        onPressed: () => logout(),
                         child: Text(
                           '로그아웃',
                           style: TextStyle(color: Colors.white),

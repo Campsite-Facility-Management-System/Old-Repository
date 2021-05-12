@@ -1,5 +1,6 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/addPicture.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,12 +22,20 @@ class AddCampScreenState extends State<AddCampScreen> {
   TextEditingController _phone = new TextEditingController();
   TextEditingController _info = new TextEditingController();
   final token = new FlutterSecureStorage();
+  final tokenCheck = Token();
+
+  _check() async {
+    bool result = await tokenCheck.tokenCheck();
+    if (!result) {
+      Navigator.pushNamed(context, '/login');
+    }
+  }
 
   getimage(imagePath, index) {
     imageList[index] = imagePath;
 
     for (int i = 0; i < 6; i++) {
-      print("index: " + i.toString() + " : " + imageList[i].toString());
+      // print("index: " + i.toString() + " : " + imageList[i].toString());
     }
   }
 
@@ -51,18 +60,25 @@ class AddCampScreenState extends State<AddCampScreen> {
       }
     }
     var response = await request.send();
-    print(request.headers);
-    print(request.fields);
-    print(request.files);
+    // print(request.headers);
+    // print(request.fields);
+    // print(request.files);
 
     print(response.statusCode);
     print(await response.stream.bytesToString());
     if (response.statusCode == 200) {
-      print("success");
+      // print("success");
       Navigator.pushNamed(context, '/homePage');
     } else if (response.statusCode == 401) {
-      print("error");
+      // print("error");
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _check();
   }
 
   @override

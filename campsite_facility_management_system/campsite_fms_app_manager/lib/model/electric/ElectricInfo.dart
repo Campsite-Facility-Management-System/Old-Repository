@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/function/token/token.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -85,7 +85,7 @@ class ElectricInfoState extends State<ElectricInfo> {
       status = 0;
     }
 
-    print(status.toString());
+    // print(status.toString());
     var response = await http.post(url, headers: {
       'Authorization': myToken,
     }, body: {
@@ -157,7 +157,7 @@ class ElectricInfoState extends State<ElectricInfo> {
                       setState(() {
                         isSwitched = value;
 
-                        print(isSwitched);
+                        // print(isSwitched);
                         _changeStatus();
                       });
                     },

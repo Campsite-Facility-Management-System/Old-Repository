@@ -1,3 +1,4 @@
+import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/homePageScreen.dart';
 import 'package:campsite_fms_app_manager/screen/more/morePageScreen.dart';
@@ -14,6 +15,15 @@ class _MainFunctionState extends State<MainFunction> {
   int currentPage = 0;
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   static DateTime pressBack;
+
+  final tokenCheck = Token();
+
+  _check() async {
+    bool result = await tokenCheck.tokenCheck();
+    if (!result) {
+      Navigator.pushNamed(context, '/login');
+    }
+  }
 
   _end(context) {
     DateTime now = DateTime.now();
@@ -32,6 +42,13 @@ class _MainFunctionState extends State<MainFunction> {
       SystemNavigator.pop();
       return true;
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _check();
   }
 
   @override

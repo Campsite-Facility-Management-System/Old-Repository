@@ -23,13 +23,15 @@ class Me {
     final response = await http.post(url, headers: {
       'Authorization': myToken,
     });
-    //print('me(status): ' + response.statusCode.toString());
-    //print('me(body): ' + response.body);
+    // print('me(status): ' + response.statusCode.toString());
+    // print('me(header): ' + response.headers.toString());
+
+    // print('me(body): ' + response.body);
 
     Map<String, dynamic> list = jsonDecode(response.body);
 
-    print(list);
-    print("url: " + list['profile_img'].toString());
+    // print(list);
+    // print("url: " + list['profile_img'].toString());
 
     return MyInfo(
       nick: list['nick_name'],
