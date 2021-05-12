@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -43,7 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
       await token.write(key: 'token', value: list['access_token']);
 
       Navigator.pushNamed(context, '/mainFunction');
-    } else if (response.statusCode == 401) {}
+    } else {
+      print("login error");
+      flutterToast();
+    }
   }
 
   _end() {
@@ -90,39 +94,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  // ListTile(
-                  //   new CachedNetworkImage(
-                  //     imageBuilder:
-                  //         (BuildContext context, ImageProvider imageProvider) {
-                  //       return AspectRatio(
-                  //         aspectRatio: 1,
-                  //         child: Container(
-                  //           decoration: BoxDecoration(
-                  //             border:
-                  //                 Border.all(width: 0.5, color: Colors.black12),
-                  //             shape: BoxShape.circle,
-                  //             image: DecorationImage(
-                  //               image: imageProvider,
-                  //               fit: BoxFit.cover,
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       );
-                  //     },
-                  //     imageUrl: Env.url +
-                  //     placeholder: (context, url) => Container(
-                  //       height: 100,
-                  //       width: 100,
-                  //     ),
-                  //     errorWidget: (context, url, error) =>
-                  //         new Icon(Icons.error),
-                  //   ),
-                  // ),
-                  SizedBox(height: 200),
+                  SizedBox(height: 100),
+                  SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: Image.asset('icon/color-brown copy.jpg')),
+                  SizedBox(height: 10),
                   Text(
-                    'Login',
+                    '모닥모닥',
                     style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.brown,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(height: 30),
@@ -132,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Text(
                           'Email',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.brown,
                           ),
                         ),
                       ]),
@@ -147,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         Text('Password',
                             style: TextStyle(
-                              color: Colors.blue,
+                              color: Colors.brown,
                             )),
                       ]),
                   TextFormField(
@@ -168,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -195,5 +178,18 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+}
+
+void flutterToast() async {
+  try {
+    Fluttertoast.showToast(
+      msg: '로그인 실패',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      textColor: Colors.white,
+    );
+  } catch (e) {
+    debugPrint(e);
   }
 }

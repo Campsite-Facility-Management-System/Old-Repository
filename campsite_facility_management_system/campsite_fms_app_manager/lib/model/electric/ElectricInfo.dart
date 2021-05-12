@@ -142,7 +142,6 @@ class ElectricInfoState extends State<ElectricInfo> {
                       uuid,
                       style: TextStyle(fontSize: 20),
                     ),
-                    // data.uuid),
                   ],
                 ),
               ),
@@ -157,7 +156,6 @@ class ElectricInfoState extends State<ElectricInfo> {
                       setState(() {
                         isSwitched = value;
 
-                        // print(isSwitched);
                         _changeStatus();
                       });
                     },
@@ -240,13 +238,14 @@ class ElectricInfoState extends State<ElectricInfo> {
                     ChangeNotifierProvider<UsageData>(
                       create: (_) => UsageData(0, 0),
                       child: Consumer<UsageData>(
-                          builder: (_, provider, child) => Text(
-                                Provider.of<UsageData>(context, listen: true)
-                                        .charge
-                                        .toString() +
-                                    "원",
-                                style: TextStyle(fontSize: 30),
-                              )),
+                        builder: (_, provider, child) => Text(
+                          Provider.of<UsageData>(context, listen: true)
+                                  .charge
+                                  .toString() +
+                              "원",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                      ),
                     ),
                   ],
                 ),
