@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/model/electric/graphData.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -16,11 +17,14 @@ class ElectricGraph extends StatefulWidget {
 
 class ElectricGraphState extends State<ElectricGraph> {
   final token = new FlutterSecureStorage();
+  final tokenFunction = new TokenFunction();
   Map gd;
   List<FlSpot> spot = List();
   List<int> leftTitle = List();
 
   Future<Null> _getData() async {
+    tokenFunction.tokenCheck(context);
+
     var url = Env.url + '/api/device/manager/energy/chart';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
@@ -84,7 +88,6 @@ class ElectricGraphState extends State<ElectricGraph> {
 }
 
 LineChartData usageChart(list, max, leftTitle, context) {
-  List<dynamic> l = List();
   return LineChartData(
     gridData: FlGridData(
       show: false,
@@ -102,40 +105,48 @@ LineChartData usageChart(list, max, leftTitle, context) {
         );
       },
     ),
-    // extraLinesData: VerticalLine(),
-    // titlesData: FlTitlesData(
-    //   show: true,
-    //   bottomTitles: SideTitles(
-    //     showTitles: true,
-    //     reservedSize: 22,
-    //     getTitles: (value) {},
-    //   ),
-    //   leftTitles:
-    // SideTitles(
-    //   showTitles: true,
-    //   getTitles: (value) {
-    //     print(value);
-    //     if (value.toInt() == leftTitle[0]) {
-    //       return value.toString();
-    //     } else if (value.toInt() == leftTitle[1]) {
-    //       return value.toString();
-    //     } else if (value.toInt() == leftTitle[2]) {
-    //       return value.toString();
-    //     } else if (value.toInt() == leftTitle[3]) {
-    //       return value.toString();
-    //     } else if (value.toInt() == leftTitle[4]) {
-    //       return value.toString();
-    //     }
-    //   },
-    // ),
-    // ),
+    titlesData: FlTitlesData(
+      leftTitles: SideTitles(
+        showTitles: true,
+        reservedSize: 30,
+        getTextStyles: (value) => const TextStyle(
+          color: Colors.black,
+          fontSize: 14,
+        ),
+        margin: 10,
+        interval: 1,
+        getTitles: (value) {
+          if (value.toInt() == 0) {
+            return '0';
+          }
+
+          if (value.toInt() ==
+              Provider.of<GraphData>(context, listen: true).max.toInt()) {
+            return Provider.of<GraphData>(context, listen: true).max.toString();
+          }
+
+          // if (value.toInt() ==
+          //     Provider.of<GraphData>(context, listen: true).max.toInt() / 4) {
+          //   return Provider.of<GraphData>(context, listen: true).max.toInt() /
+          //       4.toString();
+          // }
+
+          if (value.toInt() ==
+              Provider.of<GraphData>(context, listen: true).max.toInt()) {
+            return Provider.of<GraphData>(context, listen: true).max.toString();
+          }
+
+          return '';
+        },
+      ),
+    ),
     borderData: FlBorderData(
       show: true,
       border: Border.all(color: Colors.green, width: 1),
     ),
     minX: 0,
     maxX: 13,
-    minY: -5,
+    minY: -2,
     maxY: Provider.of<GraphData>(context, listen: true).max * 1.2,
     lineBarsData: [
       LineChartBarData(

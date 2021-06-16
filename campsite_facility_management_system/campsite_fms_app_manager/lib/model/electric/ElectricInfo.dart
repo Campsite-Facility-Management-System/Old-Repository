@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -19,12 +19,16 @@ class ElectricInfo extends StatefulWidget {
 
 class ElectricInfoState extends State<ElectricInfo> {
   final token = new FlutterSecureStorage();
+  final tokenFunction = new TokenFunction();
+
   bool isSwitched = false;
   Map<String, dynamic> list;
   var deviceName;
   var uuid;
 
   Future<Null> getUsageData() async {
+    tokenFunction.tokenCheck(context);
+
     var url = Env.url + '/api/device/manager/energy/usage';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
@@ -50,6 +54,8 @@ class ElectricInfoState extends State<ElectricInfo> {
   }
 
   Future<Null> getDevice() async {
+    tokenFunction.tokenCheck(context);
+
     var url = Env.url + '/api/device/manager/list';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
@@ -74,7 +80,9 @@ class ElectricInfoState extends State<ElectricInfo> {
   }
 
   Future<Null> _changeStatus() async {
-    var url = Env.url + '/api/device/manager/controll';
+    tokenFunction.tokenCheck(context);
+
+    var url = Env.url + '/api/device/manager/energy/controll';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
     int status;
@@ -126,7 +134,7 @@ class ElectricInfoState extends State<ElectricInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      deviceName,
+                      deviceName != null ? deviceName : 'loading',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                       textAlign: TextAlign.left,
@@ -139,7 +147,7 @@ class ElectricInfoState extends State<ElectricInfo> {
                       style: TextStyle(fontSize: 20),
                     ),
                     Text(
-                      uuid,
+                      uuid != null ? uuid : 'loading',
                       style: TextStyle(fontSize: 20),
                     ),
                   ],

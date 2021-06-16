@@ -3,41 +3,21 @@ import 'package:campsite_fms_app_manager/function/addPicture.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-import 'package:campsite_fms_app_manager/env.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 List<dynamic> imageList = List(6);
 
-class AddCampScreen extends StatefulWidget {
+class AddBuyScreen extends StatefulWidget {
   @override
-  AddCampScreenState createState() => AddCampScreenState();
+  AddBuyScreenState createState() => AddBuyScreenState();
 }
 
-class AddCampScreenState extends State<AddCampScreen> {
+class AddBuyScreenState extends State<AddBuyScreen> {
   TextEditingController _name = new TextEditingController();
-  TextEditingController _addr = new TextEditingController();
-  TextEditingController _phone = new TextEditingController();
+  TextEditingController _price = new TextEditingController();
   TextEditingController _info = new TextEditingController();
   final token = new FlutterSecureStorage();
   final tokenFunction = TokenFunction();
-
-  _check() async {
-    bool result = await tokenFunction.tokenCheck(context);
-    if (!result) {
-      Navigator.pushNamed(context, '/login');
-    }
-  }
-
-  getimage(imagePath, index) {
-    imageList[index] = imagePath;
-
-    for (int i = 0; i < 6; i++) {
-      // print("index: " + i.toString() + " : " + imageList[i].toString());
-    }
-  }
 
   upload() async {
     var url = Env.url + '/api/campsite/manager/add';
@@ -48,8 +28,7 @@ class AddCampScreenState extends State<AddCampScreen> {
     request.headers.addAll({'Authorization': myToken});
     request.fields.addAll({
       'name': _name.text,
-      'telephone': _phone.text,
-      'address': _addr.text,
+      'price': _price.text,
       'description': _info.text,
     });
 
@@ -75,13 +54,6 @@ class AddCampScreenState extends State<AddCampScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _check();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -93,7 +65,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                 height: 100,
               ),
               Text(
-                '캠핑장 추가',
+                '구매 물품 추가',
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(
@@ -164,7 +136,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                     children: [
                       Row(
                         children: [
-                          Text('캠핑장 이름'),
+                          Text('물품 이름'),
                         ],
                       ),
                       SizedBox(
@@ -180,7 +152,7 @@ class AddCampScreenState extends State<AddCampScreen> {
                       ),
                       Row(
                         children: [
-                          Text('캠핑장 주소'),
+                          Text('물품 가격'),
                         ],
                       ),
                       SizedBox(
@@ -189,14 +161,14 @@ class AddCampScreenState extends State<AddCampScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             border: OutlineInputBorder(), hintText: '캠핑장 주소'),
-                        controller: _addr,
+                        controller: _price,
                       ),
                       SizedBox(
                         height: 5,
                       ),
                       Row(
                         children: [
-                          Text('캠핑장 전화번호'),
+                          Text('물품 정보'),
                         ],
                       ),
                       SizedBox(
@@ -205,24 +177,10 @@ class AddCampScreenState extends State<AddCampScreen> {
                       TextFormField(
                         decoration: InputDecoration(
                             border: OutlineInputBorder(), hintText: '캠핑장 전화번호'),
-                        controller: _phone,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          Text('캠핑장 소개'),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(), hintText: '캠핑장 소개'),
                         controller: _info,
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                     ],
                   ),
@@ -242,51 +200,3 @@ class AddCampScreenState extends State<AddCampScreen> {
     );
   }
 }
-
-/*
-  Widget showImage() {
-    return FutureBuilder<File>(
-      future: file,
-      builder: (BuildContext context, AsyncSnapshot<File> image) {
-        if (image.connectionState == ConnectionState.done &&
-            null != image.data) {
-          tmp = image.data;
-          base64Image = base64Encode(image.data.readAsBytesSync());
-          return Flexible(
-            child: Image.file(
-              image.data,
-              fit: BoxFit.fill,
-            ),@
-          );
-        } else {
-          return Text(
-            '이미지를 선택해주세요',
-            textAlign: TextAlign.center,
-          );
-        }
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 200,
-              ),
-              Text('캠핑장 추가'),
-              Text('대표사진'),
-              OutlineButton(
-                  onPressed: () => getImage(), child: Icon(Icons.add_a_photo)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/

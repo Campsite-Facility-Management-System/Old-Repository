@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,10 +22,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final token = new FlutterSecureStorage();
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   static DateTime pressBack;
+  final tokenFunction = new TokenFunction();
 
   _check() async {
-    final tokenCheck = new Token();
-    bool result = await tokenCheck.tokenCheck();
+    bool result = await tokenFunction.tokenCheck(context);
     // print('tokenstatus: ' + tokenStatus.toString());
     if (result == true) {
       Navigator.pushNamed(context, '/mainFunction');
@@ -33,20 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _login(String email, String passwd) async {
-    var url = Env.url + '/api/auth/login';
-    var response = await http.post(url, body: {
-      'password': passwd,
-      'email': email,
-    });
-
-    if (response.statusCode == 200) {
-      Map<String, dynamic> list = jsonDecode(response.body);
-      await token.write(key: 'token', value: list['access_token']);
-
+    bool result = await tokenFunction.tokenCreate(email, passwd);
+    if (result) {
       Navigator.pushNamed(context, '/mainFunction');
-    } else {
-      print("login error");
-      flutterToast();
     }
   }
 
@@ -181,15 +170,15 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-void flutterToast() async {
-  try {
-    Fluttertoast.showToast(
-      msg: '로그인 실패',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      textColor: Colors.white,
-    );
-  } catch (e) {
-    debugPrint(e);
-  }
-}
+// void flutterToast() async {
+//   try {
+//     Fluttertoast.showToast(
+//       msg: '로그인 실패',
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.BOTTOM,
+//       textColor: Colors.white,
+//     );
+//   } catch (e) {
+//     debugPrint(e);
+//   }
+// }

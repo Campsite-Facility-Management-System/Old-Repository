@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/gateway.dart';
 import 'package:campsite_fms_app_manager/function/myInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -12,7 +13,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> {
-  final me = Me();
+  final gateway = Gateway();
   final token = new FlutterSecureStorage();
 
   Future<bool> logout() async {
@@ -43,7 +44,7 @@ class ProfileScreenState extends State<ProfileScreen> {
     return Container(
       margin: EdgeInsets.only(bottom: 50),
       child: FutureBuilder<MyInfo>(
-        future: me.me(),
+        future: gateway.me(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Column(
@@ -92,11 +93,17 @@ class ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              snapshot.data.nick,
+                              snapshot.data.nick != null
+                                  ? snapshot.data.nick
+                                  : 'null',
                               style: TextStyle(fontSize: 25),
                             ),
                             Text(
-                              '포인트: ' + snapshot.data.point + ' Point',
+                              '포인트: ' +
+                                  (snapshot.data.point != null
+                                      ? snapshot.data.point
+                                      : 'null') +
+                                  ' Point',
                               style: TextStyle(fontSize: 17),
                             ),
                           ],

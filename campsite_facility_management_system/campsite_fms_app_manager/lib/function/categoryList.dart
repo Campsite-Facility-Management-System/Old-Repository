@@ -1,5 +1,6 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/deviceList.dart';
+import 'package:campsite_fms_app_manager/function/gateway.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/campData.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/model/homePage/category/categoryTile.dart';
@@ -18,6 +19,7 @@ class CategoryList extends StatefulWidget {
 
 class CategoryListState extends State<CategoryList> {
   final token = new FlutterSecureStorage();
+  final gateway = new Gateway();
   List<dynamic> categoryList;
   final provider = IdCollector();
 

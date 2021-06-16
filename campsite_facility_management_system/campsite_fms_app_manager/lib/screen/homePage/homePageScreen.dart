@@ -1,5 +1,5 @@
 import 'package:campsite_fms_app_manager/function/campList.dart';
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/function/campList.dart';
 import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
@@ -18,10 +18,10 @@ class HomePageScreen extends StatefulWidget {
 
 class HomePageScreenState extends State<HomePageScreen> {
   final token = new FlutterSecureStorage();
-  final tokenCheck = Token();
+  final tokenFunction = TokenFunction();
 
   _check() async {
-    bool result = await tokenCheck.tokenCheck();
+    bool result = await tokenFunction.tokenCheck(context);
     if (!result) {
       Navigator.pushNamed(context, '/login');
     }

@@ -1,4 +1,5 @@
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/screen/electric/electricListScreen.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/homePageScreen.dart';
 import 'package:campsite_fms_app_manager/screen/more/morePageScreen.dart';
@@ -15,11 +16,10 @@ class _MainFunctionState extends State<MainFunction> {
   int currentPage = 0;
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   static DateTime pressBack;
-
-  final tokenCheck = Token();
+  final tokenFuntion = TokenFunction();
 
   _check() async {
-    bool result = await tokenCheck.tokenCheck();
+    bool result = await tokenFuntion.tokenCheck(context);
     if (!result) {
       Navigator.pushNamed(context, '/login');
     }
@@ -64,7 +64,7 @@ class _MainFunctionState extends State<MainFunction> {
           index: currentPage,
           children: [
             HomePageScreen(),
-            ElectricScreen(),
+            ElectricListScreen(),
             NotiPageScreen(),
             MorePageScreen(),
           ],

@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/gateway.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/campData.dart';
 import 'package:campsite_fms_app_manager/model/homePage/camp/myCamp.dart';
 import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
@@ -14,30 +15,17 @@ class CampList extends StatefulWidget {
 
 class CampListState extends State<CampList> {
   final token = new FlutterSecureStorage();
+  final gateway = new Gateway();
   var resCount = '0';
   var ordCount = '0';
   List<dynamic> list;
 
   Future<Null> _getData() async {
-    var url = Env.url + '/api/campsite/manager/list';
-    String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
-
-    var response = await http.post(url, headers: {
-      'Authorization': myToken,
-    });
-
-    var d = utf8.decode(response.bodyBytes);
+    list = await gateway.getCampList(context);
 
     setState(() {
-      list = jsonDecode(d) as List;
+      list;
     });
-
-    // print(list.length);
-
-    // for (int i = 0; i < list.length; i++) {
-    //   print('index: ' + i.toString() + list[i].toString());
-    // }
   }
 
   @override

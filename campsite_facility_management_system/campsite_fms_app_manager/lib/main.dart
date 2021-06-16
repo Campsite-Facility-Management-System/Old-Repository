@@ -1,5 +1,5 @@
-import 'package:campsite_fms_app_manager/model/electric/ElectricGraph.dart';
-import 'package:campsite_fms_app_manager/model/electric/ElectricInfo.dart';
+import 'package:campsite_fms_app_manager/model/electric/electricGraph.dart';
+import 'package:campsite_fms_app_manager/model/electric/electricInfo.dart';
 import 'package:campsite_fms_app_manager/model/electric/graphData.dart';
 import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '모닥모닥',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/mainFunction',
+      initialRoute: '/login',
       routes: {
         // '/': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),

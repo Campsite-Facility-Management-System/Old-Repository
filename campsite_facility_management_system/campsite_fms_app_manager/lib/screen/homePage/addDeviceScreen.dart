@@ -1,5 +1,5 @@
 import 'package:campsite_fms_app_manager/env.dart';
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -15,10 +15,10 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
   TextEditingController _uuid = new TextEditingController();
   TextEditingController _name = new TextEditingController();
   final token = new FlutterSecureStorage();
-  final tokenCheck = Token();
+  final tokenFunction = TokenFunction();
 
   _check() async {
-    bool result = await tokenCheck.tokenCheck();
+    bool result = await tokenFunction.tokenCheck(context);
     if (!result) {
       Navigator.pushNamed(context, '/login');
     }

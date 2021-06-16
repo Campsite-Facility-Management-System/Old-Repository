@@ -7,6 +7,7 @@ class IdCollector extends ChangeNotifier {
   List ciList = new List();
   List cnList = new List();
   Map<String, int> cMap = new Map();
+  Map<String, int> campIndex = new Map();
 
   setCategoryId(id) {
     this.selectedCategoryId = id;
@@ -30,5 +31,9 @@ class IdCollector extends ChangeNotifier {
 
   setCMap(index, name) {
     this.cMap[name] = index;
+  }
+
+  setCampIndex(index, name) {
+    this.campIndex[name] = index;
   }
 }

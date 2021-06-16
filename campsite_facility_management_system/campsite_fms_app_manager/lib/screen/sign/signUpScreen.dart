@@ -82,6 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10),
           child: Form(
             key: _formKey,
             child: Column(
@@ -90,9 +91,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: <Widget>[
                 SizedBox(height: 100),
                 Text(
-                  'SignIn',
+                  '회원가입',
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.brown,
+                    fontSize: 30,
                   ),
                 ),
                 SizedBox(height: 20),

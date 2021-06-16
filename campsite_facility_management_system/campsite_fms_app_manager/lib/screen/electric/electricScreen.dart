@@ -1,7 +1,7 @@
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
-import 'package:campsite_fms_app_manager/function/token/tokenCheck.dart';
-import 'package:campsite_fms_app_manager/model/electric/ElectricGraph.dart';
-import 'package:campsite_fms_app_manager/model/electric/ElectricInfo.dart';
+import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/model/electric/electricGraph.dart';
+import 'package:campsite_fms_app_manager/model/electric/electricInfo.dart';
 import 'package:flutter/material.dart';
 
 class ElectricScreen extends StatefulWidget {
@@ -11,10 +11,10 @@ class ElectricScreen extends StatefulWidget {
 
 class ElectricScreenState extends State<ElectricScreen> {
   var refreshKey = GlobalKey<RefreshIndicatorState>();
-  final tokenCheck = Token();
+  final tokenFuntion = TokenFunction();
 
   _check() async {
-    bool result = await tokenCheck.tokenCheck();
+    bool result = await tokenFuntion.tokenCheck(context);
     if (!result) {
       Navigator.pushNamed(context, '/login');
     }
