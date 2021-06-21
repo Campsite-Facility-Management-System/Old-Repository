@@ -14,21 +14,20 @@ class ElectricDeviceTile {
             children: <Widget>[
               Expanded(
                 child: SizedBox(
-                  height: 60,
+                  height: 80,
                   child: ListTile(
-                    onTap: () => {
-                      Navigator.pushReplacementNamed(context, '/electricScreen')
-                    },
+                    onTap: () =>
+                        {Navigator.pushNamed(context, '/electricScreen')},
                     title: Text(
                       item['name'],
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 25),
                     ),
                     subtitle: Text(
-                      item['state'].toString(),
-                      style: TextStyle(fontSize: 16),
+                      item['usage'].toString() + 'kw',
+                      style: TextStyle(fontSize: 18),
                     ),
                     trailing: Text(
-                      item['usage'].toString() + 'kw',
+                      item['state'].toString(),
                       style: TextStyle(fontSize: 16),
                     ),
                   ),

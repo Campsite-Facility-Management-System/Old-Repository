@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:campsite_fms_app_manager/env.dart';
-import 'package:campsite_fms_app_manager/function/campList.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/getX/electricGetX.dart';
 import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryList.dart';
-import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryTile.dart';
+import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -15,53 +19,51 @@ class ElectricListScreen extends StatefulWidget {
 }
 
 class ElectricListScreenState extends State<ElectricListScreen> {
-  var selected;
+  var selectedcampName;
   var selectedIndex;
   var selectedId;
   var campId;
+  bool refreshListener = false;
+  final provider = new ElectricProvider();
   final token = new FlutterSecureStorage();
   final tokenFunction = new TokenFunction();
   List<String> campNameList = [];
   List<String> campIdList = [];
 
-  Future<Null> _getData() async {
-    var url = Env.url + '/api/campsite/manager/info';
-    String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
+  // Future<Null> getData() async {
+  //   var url = Env.url + '/api/campsite/manager/info';
+  //   String value = await token.read(key: 'token');
+  //   String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
-      'Authorization': myToken,
-    });
+  //   var response = await http.post(url, headers: {
+  //     'Authorization': myToken,
+  //   });
 
-    // print(data);
-    setState(() {
-      var new_data = utf8.decode(response.bodyBytes);
-      var data = jsonDecode(new_data);
+  //   setState(() {
+  //     var newData = utf8.decode(response.bodyBytes);
+  //     var data = jsonDecode(newData);
 
-      // print("data: " + data.toString());
-      // print("data(name): " + data[0]['name'].toString());
-      // print("data(length): " + data.length.toString());
-      selectedIndex = 0;
+  //     for (var i = 0; i < data.length; i++) {
+  //       campNameList.add(data[i]['name'].toString());
+  //       campIdList.add(data[i]['id'].toString());
+  //     }
+  //     selected = campNameList[0];
 
-      for (var i = 0; i < data.length; i++) {
-        campNameList.add(data[i]['name'].toString());
-        campIdList.add(data[i]['id'].toString());
-      }
-
-      // print(campNameList);
-      // print('idList: ' + campIdList.toString());
-    });
-  }
+  //     Provider.of<ElectricProvider>(context, listen: true)
+  //         .setCampId(campIdList[0].toString());
+  //   });
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
+    // _getData();
     super.initState();
-    _getData();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ElectricGetX());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -70,8 +72,8 @@ class ElectricListScreenState extends State<ElectricListScreen> {
               height: 50,
             ),
             DropdownButton(
-              value: selected,
-              items: campNameList.map(
+              value: controller.selectedCampName,
+              items: controller.campNameList.map(
                 (value) {
                   return DropdownMenuItem(
                     value: value,
@@ -81,8 +83,13 @@ class ElectricListScreenState extends State<ElectricListScreen> {
               ).toList(),
               onChanged: (value) {
                 setState(() {
-                  selected = value;
-                  selectedIndex = campNameList.indexOf(value);
+                  controller.setSelectedCampName(value);
+                  selectedIndex = controller.campNameList.indexOf(value);
+                  controller
+                      .setSelectedCampId(controller.campIdList[selectedIndex]);
+                  // Provider.of<ElectricProvider>(context, listen: true)
+                  //     .setCampId(campIdList[selectedIndex].toString());
+
                   // print("selected: " + selected);
                   // print("selectedIndex: " + selectedIndex.toString());
                   // print("selectedId: " + campIdList[selectedIndex].toString());
@@ -90,11 +97,39 @@ class ElectricListScreenState extends State<ElectricListScreen> {
               },
             ),
             SizedBox(
-              height: 50,
+              height: 10,
             ),
-            Container(
-              child: ElectricCategoryList(campIdList[selectedIndex].toString()),
-            )
+            GetBuilder<ElectricGetX>(
+              builder: (_) {
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text('새로고침'),
+                        onPressed: () => {controller.apiElectricCategoryList()},
+                      ),
+                      Container(
+                        height: 650,
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        child: ListView.builder(
+                          // shrinkWrap: true,
+                          itemCount: controller.detailData == null
+                              ? 0
+                              : controller.detailData?.length,
+                          itemBuilder: (context, index) {
+                            // print("length: " +
+                            //     controller.detailData[1].toString());
+
+                            return ElectricCategoryTile.buildTile(
+                                context, controller.detailData[index]);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

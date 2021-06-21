@@ -1,6 +1,7 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/myInfo.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -48,6 +49,7 @@ class Gateway {
 
     var d = utf8.decode(response.bodyBytes);
     campList = jsonDecode(d) as List;
+
     return campList;
   }
 

@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class GraphData extends ChangeNotifier {
-  var max;
+  var max = 0;
   var electricity;
 
   GraphData(this.max, this.electricity);

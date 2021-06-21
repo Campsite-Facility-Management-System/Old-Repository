@@ -1,4 +1,6 @@
+import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricListScreen.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/homePageScreen.dart';
@@ -6,8 +8,15 @@ import 'package:campsite_fms_app_manager/screen/more/morePageScreen.dart';
 import 'package:campsite_fms_app_manager/screen/notification/notiPageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 class MainFunction extends StatefulWidget {
+  final int pageNum;
+  const MainFunction(this.pageNum);
   @override
   _MainFunctionState createState() => _MainFunctionState();
 }
@@ -17,6 +26,10 @@ class _MainFunctionState extends State<MainFunction> {
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   static DateTime pressBack;
   final tokenFuntion = TokenFunction();
+  final token = new FlutterSecureStorage();
+  List<String> campNameList = [];
+  List<String> campIdList = [];
+  var selected;
 
   _check() async {
     bool result = await tokenFuntion.tokenCheck(context);

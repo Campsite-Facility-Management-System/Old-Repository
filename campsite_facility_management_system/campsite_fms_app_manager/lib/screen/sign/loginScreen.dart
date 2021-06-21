@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:campsite_fms_app_manager/function/mainFunction.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:campsite_fms_app_manager/env.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _email = new TextEditingController();
   TextEditingController _passwd = new TextEditingController();
   final token = new FlutterSecureStorage();
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+  static final GlobalKey<ScaffoldState> _globalKey = GlobalKey();
   static DateTime pressBack;
   final tokenFunction = new TokenFunction();
 
@@ -29,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // print('tokenstatus: ' + tokenStatus.toString());
     if (result == true) {
       Navigator.pushNamed(context, '/mainFunction');
+      // Get.toNamed('/mainFunction/0');
     }
   }
 
@@ -36,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
     bool result = await tokenFunction.tokenCreate(email, passwd);
     if (result) {
       Navigator.pushNamed(context, '/mainFunction');
+      // Get.toNamed('/mainFunction/0');
     }
   }
 

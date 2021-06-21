@@ -82,7 +82,7 @@ class ElectricInfoState extends State<ElectricInfo> {
   Future<Null> _changeStatus() async {
     tokenFunction.tokenCheck(context);
 
-    var url = Env.url + '/api/device/manager/energy/controll';
+    var url = Env.url + '/api/device/manager/controll';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
     int status;
@@ -100,7 +100,7 @@ class ElectricInfoState extends State<ElectricInfo> {
       'device_id': '1',
       'command': status.toString(),
     });
-    // print(response.statusCode);
+    print(response.statusCode);
   }
 
   @override
