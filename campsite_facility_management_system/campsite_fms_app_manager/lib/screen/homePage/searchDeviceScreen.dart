@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:campsite_fms_app_manager/getX/setDeviceGetX.dart';
 import 'package:campsite_fms_app_manager/model/homePage/bluetoothList.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/setDeviceWifiScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -71,7 +73,8 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
           //Data entry point
           print("데이터: " + data.toString());
           print('수신 데이터: ' + Utf8Decoder().convert(data));
-          data = data;
+
+          return Utf8Decoder().convert(data);
         });
       } catch (exception) {
         print("수신 오류");
@@ -88,8 +91,11 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
     // }
   }
 
-  Future send(Uint8List data) async {
-    connection.output.add(data);
+  Future send(data) async {
+    // connection.output.add(data);
+    // await connection.output.allSent;
+
+    connection.output.add(utf8.encode(data + '\r\n'));
     await connection.output.allSent;
   }
 
@@ -132,7 +138,9 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
             device: result.device,
             rssi: result.rssi,
             onTap: () {
-              connect(result.device.address);
+              ;
+              Get.to(SetDeviceWifiScreen(),
+                  arguments: connect(result.device.address));
               // Navigator.of(context).pop(result.device);
             },
             onLongPress: () async {

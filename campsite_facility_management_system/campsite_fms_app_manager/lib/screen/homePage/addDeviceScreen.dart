@@ -1,8 +1,9 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/getX/setDeviceGetX.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/bluetoothScreen.dart';
-import 'package:campsite_fms_app_manager/screen/homePage/searchDevice.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/searchDeviceScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class AddDeviceScreen extends StatefulWidget {
 }
 
 class AddDeviceScreenState extends State<AddDeviceScreen> {
-  TextEditingController _uuid = new TextEditingController();
+  var uuid;
   TextEditingController _name = new TextEditingController();
   final token = new FlutterSecureStorage();
   final tokenFunction = TokenFunction();
@@ -30,36 +31,6 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
   var selected;
   var selectedIndex;
 
-  upload() async {
-    var url = Env.url + '/api/device/manager/add';
-    String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
-
-    var request = http.MultipartRequest('POST', Uri.parse(url));
-    request.headers.addAll({'Authorization': myToken});
-    request.fields.addAll({
-      'name': _name.text,
-      'uuid': _uuid.text,
-      'category_id': selectedIndex.toString(),
-      'campsite_id': Provider.of<IdCollector>(context, listen: true)
-          .selectedCampId
-          .toString(),
-    });
-
-    var response = await request.send();
-    // print(request.headers);
-    // print(request.fields);
-
-    // print(response.statusCode);
-    // print(await response.stream.bytesToString());
-    if (response.statusCode == 200) {
-      // print("success");
-      Navigator.pushNamed(context, '/campDetail');
-    } else if (response.statusCode == 401) {
-      // print("error");
-    }
-  }
-
   @override
   void initState() {
     // TODO: implement initState
@@ -69,6 +40,8 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SetDeviceGetX());
+
     // List ciList = Provider.of<IdCollector>(context, listen: true).ciList;
     // List cnList = Provider.of<IdCollector>(context, listen: true).cnList;
     //selected = cnList[0];
@@ -100,21 +73,22 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                         Row(
                           children: [
                             RaisedButton(
-                                child: Text('디바이스 검색'),
+                                child: Text('블루투스 검색'),
                                 onPressed: () =>
                                     {Get.to(SearchDeviceScreen())}),
                           ],
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(), hintText: 'UUID'),
-                          controller: _uuid,
+                        Row(
+                          children: <Widget>[
+                            Text('블루투스 이름: '),
+                            Text(controller.bluetoothName ??= '선택되지 않음'),
+                          ],
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 15,
                         ),
                         Row(
                           children: [
@@ -138,31 +112,35 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                         ),
                         Row(
                           children: [
-                            Text('디바이스 이름'),
+                            Text('카테고리 선택'),
                           ],
                         ),
                         SizedBox(
                           height: 5,
                         ),
-                        DropdownButton(
-                          value: selected,
-                          items: cMap.keys.map(
-                            (value) {
-                              return DropdownMenuItem(
-                                value: value,
-                                child: Text(value),
-                              );
-                            },
-                          ).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              selected = value;
-                              selectedIndex = cMap[selected];
-                              print("selected: " + selected);
-                              print(cMap[selected]);
-                            });
-                          },
-                        ),
+                        Row(
+                          children: [
+                            DropdownButton(
+                              value: selected,
+                              items: cMap.keys.map(
+                                (value) {
+                                  return DropdownMenuItem(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                },
+                              ).toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  selected = value;
+                                  selectedIndex = cMap[selected];
+                                  print("selected: " + selected);
+                                  print(cMap[selected]);
+                                });
+                              },
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -171,7 +149,12 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                   height: 10,
                 ),
                 RaisedButton(
-                  onPressed: () => upload(),
+                  onPressed: () => controller.upload(
+                      _name,
+                      selectedIndex,
+                      Provider.of<IdCollector>(context, listen: true)
+                          .selectedCampId
+                          .toString()),
                   child: Text('등록하기'),
                 ),
               ],

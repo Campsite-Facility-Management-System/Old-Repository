@@ -1,22 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/getX/campDetailGetX.dart';
 import 'package:campsite_fms_app_manager/model/homePage/profile.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
 
 class MyCamp {
-  // static setCampId(campId) {
-  //   print("parameter: " + campId.toString());
-  //   provider.setCampId(campId);
-  //   print("provider: " + provider.selectedCampId.toString());
-  //   print(provider.selectedCampId.toString());
-  // }
+  static final controller = Get.put(CampDetailGetX());
 
   static Widget buildTile(context, item) => Container(
         child: Container(
@@ -76,12 +73,7 @@ class MyCamp {
                   onPressed: () => {
                     Provider.of<IdCollector>(context, listen: false)
                         .setCampId(item['id']),
-                    // setCampId(item['id']),
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => CampDetailScreen()))
-
+                    controller.selectedCampId = item['id'],
                     Navigator.pushNamed(context, '/campDetail')
                   },
                   child: Text(
