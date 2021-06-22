@@ -1,5 +1,6 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/getX/tokenGetX.dart';
 import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricListScreen.dart';
 import 'package:campsite_fms_app_manager/screen/electric/electricScreen.dart';
@@ -9,6 +10,7 @@ import 'package:campsite_fms_app_manager/screen/notification/notiPageScreen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -23,7 +25,7 @@ class MainFunction extends StatefulWidget {
 
 class _MainFunctionState extends State<MainFunction> {
   int currentPage = 0;
-  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   static DateTime pressBack;
   final tokenFuntion = TokenFunction();
   final token = new FlutterSecureStorage();
@@ -31,48 +33,49 @@ class _MainFunctionState extends State<MainFunction> {
   List<String> campIdList = [];
   var selected;
 
-  _check() async {
-    bool result = await tokenFuntion.tokenCheck(context);
-    if (!result) {
-      Navigator.pushNamed(context, '/login');
-    }
-  }
+  // _check() async {
+  //   bool result = await tokenFuntion.tokenCheck(context);
+  //   if (!result) {
+  //     Navigator.pushNamed(context, '/login');
+  //   }
+  // }
 
-  _end(context) {
-    DateTime now = DateTime.now();
-    if (pressBack == null || now.difference(pressBack) > Duration(seconds: 2)) {
-      pressBack = now;
-      _globalKey.currentState;
-      // ..hideCurrentSnackBar()
-      _globalKey.currentState.showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text('한번 더 누르면 앱을 종료합니다'),
-        duration: Duration(seconds: 2),
-      ));
+  // _end(context) {
+  //   DateTime now = DateTime.now();
+  //   if (pressBack == null || now.difference(pressBack) > Duration(seconds: 2)) {
+  //     pressBack = now;
+  //     _globalKey.currentState;
+  //     // ..hideCurrentSnackBar()
+  //     _globalKey.currentState.showSnackBar(SnackBar(
+  //       behavior: SnackBarBehavior.floating,
+  //       content: Text('한번 더 누르면 앱을 종료합니다'),
+  //       duration: Duration(seconds: 2),
+  //     ));
 
-      return false;
-    } else {
-      SystemNavigator.pop();
-      return true;
-    }
-  }
+  //     return false;
+  //   } else {
+  //     SystemNavigator.pop();
+  //     return true;
+  //   }
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _check();
   }
 
   @override
   Widget build(BuildContext context) {
+    final tokenController = Get.put(TokenGetX());
+
     return WillPopScope(
       onWillPop: () async {
-        bool result = _end(context);
+        bool result = tokenController.end();
         return await Future.value(result);
       },
       child: Scaffold(
-        key: _globalKey,
+        key: tokenController.globalKey,
         body: IndexedStack(
           index: currentPage,
           children: [

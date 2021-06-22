@@ -1,8 +1,11 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/bluetoothScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/searchDevice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -96,7 +99,10 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                       children: [
                         Row(
                           children: [
-                            Text('UUID'),
+                            RaisedButton(
+                                child: Text('디바이스 검색'),
+                                onPressed: () =>
+                                    {Get.to(SearchDeviceScreen())}),
                           ],
                         ),
                         SizedBox(

@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/gateway.dart';
 import 'package:campsite_fms_app_manager/function/myInfo.dart';
+import 'package:campsite_fms_app_manager/getX/tokenGetX.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,31 +18,10 @@ class ProfileScreenState extends State<ProfileScreen> {
   final gateway = Gateway();
   final token = new FlutterSecureStorage();
 
-  Future<bool> logout() async {
-    var url = Env.url + '/api/auth/logout';
-    String value = await token.read(key: 'token');
-    String myToken = "Bearer" + value.toString();
-
-    var response = await http.post(url, headers: {
-      'Authorization': myToken,
-    });
-
-    // print('tokenTest(myToken): ' + myToken);
-    // print('tokenTest(response.body): ' + response.body);
-
-    var data = jsonDecode(response.body);
-    // print(data['status']);
-
-    if (data['message'] == 'Successfully logged out') {
-      print("logout success");
-      Navigator.pushNamed(context, '/login');
-    } else {
-      print("logout error");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final tokenController = Get.put(TokenGetX());
+
     return Container(
       margin: EdgeInsets.only(bottom: 50),
       child: FutureBuilder<MyInfo>(
@@ -112,7 +93,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       SizedBox(width: 30),
                       RaisedButton(
                         color: Colors.green,
-                        onPressed: () => logout(),
+                        onPressed: () => tokenController.logout(),
                         child: Text(
                           '로그아웃',
                           style: TextStyle(color: Colors.white),

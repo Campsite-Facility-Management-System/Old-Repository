@@ -49,9 +49,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: '모닥모닥',
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      home: MainFunction(0),
       routes: {
-        // '/': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/signIn': (context) => SignUpScreen(),
         '/mainFunction': (context) => MainFunction(0),
@@ -63,7 +62,6 @@ class MyApp extends StatelessWidget {
         '/addCategory': (context) => AddCategoryScreen(),
         '/campDetail': (context) => CampDetailScreen(),
         '/electricInfo': (context) => ElectricInfo(),
-        // '/electricGraph': (context) => ElectricGraph(),
         '/electricScreen': (contetx) => ElectricScreen(),
       },
     );
