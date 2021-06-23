@@ -24,55 +24,54 @@ class CategoryListState extends State<CategoryList> {
   List<dynamic> categoryList;
   final provider = IdCollector();
 
-  Future<Null> _getData() async {
-    var url = Env.url + '/api/category/manager/list';
-    String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
+  // Future<Null> _getData() async {
+  //   var url = Env.url + '/api/category/manager/list';
+  //   String value = await token.read(key: 'token');
+  //   String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
-      'Authorization': myToken,
-    }, body: {
-      'campsite_id': Provider.of<IdCollector>(context, listen: true)
-          .selectedCampId
-          .toString(),
-    });
-    var data = utf8.decode(response.bodyBytes);
-    // print("data: " + data.toString());
-    setState(() {
-      categoryList = jsonDecode(data) as List;
-    });
+  //   var response = await http.post(url, headers: {
+  //     'Authorization': myToken,
+  //   }, body: {
+  //     'campsite_id': Provider.of<IdCollector>(context, listen: true)
+  //         .selectedCampId
+  //         .toString(),
+  //   });
+  //   var data = utf8.decode(response.bodyBytes);
+  //   // print("data: " + data.toString());
+  //   setState(() {
+  //     categoryList = jsonDecode(data) as List;
+  //   });
 
-    for (var i = 0; i < categoryList.length; i++) {
-      Provider.of<IdCollector>(context, listen: true)
-          .setCMap(categoryList[i]['id'], categoryList[i]['name']);
-    }
-  }
+  //   for (var i = 0; i < categoryList.length; i++) {
+  //     Provider.of<IdCollector>(context, listen: true)
+  //         .setCMap(categoryList[i]['id'], categoryList[i]['name']);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    _getData();
+    // _getData();
   }
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CampDetailGetX());
-    controller.getData();
+    // controller.apiCampDetail();
     return Container(
       height: 650,
       // margin: EdgeInsets.only(left: 10, right: 10),
-      child: GetBuilder<CampDetailGetX>(
-        builder: (_) {
-          return ListView.builder(
-            // shrinkWrap: true,
-            itemCount: categoryList == null ? 0 : categoryList?.length,
-            itemBuilder: (context, index) {
-              return CategoryTile.buildTile(
-                  context, controller.categoryList[index]);
-            },
-          );
-        },
-      ),
+      child: GetBuilder<CampDetailGetX>(builder: (_) {
+        return ListView.builder(
+          // shrinkWrap: true,
+          itemCount:
+              controller.detailData == null ? 0 : controller.detailData?.length,
+          itemBuilder: (context, index) {
+            return CategoryTile.buildTile(
+                context, controller.detailData[index]);
+          },
+        );
+      }),
     );
   }
 }

@@ -60,4 +60,30 @@ class SetDeviceGetX extends GetxController {
       // print("error");
     }
   }
+
+  connect(String address) async {
+    try {
+      connection = await BluetoothConnection.toAddress(address);
+      print('커넥트 결과: Connected to the device');
+
+      try {
+        connection.output.add(utf8.encode('abc' + '\r\n'));
+        await connection.output.allSent;
+
+        print(".......");
+        connection.input.listen((Uint8List data) {
+          //Data entry point
+          print("데이터: " + data.toString());
+          print('수신 데이터: ' + Utf8Decoder().convert(data));
+
+          return Utf8Decoder().convert(data);
+        });
+      } catch (exception) {
+        print("수신 오류");
+        print(exception);
+      }
+    } catch (exception) {
+      print('커넥트 결과: Cannot connect, exception occured');
+    }
+  }
 }

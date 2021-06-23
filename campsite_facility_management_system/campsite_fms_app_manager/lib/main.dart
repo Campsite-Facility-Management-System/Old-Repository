@@ -10,6 +10,7 @@ import 'package:campsite_fms_app_manager/screen/homePage/addCategoryScreen.dart'
 import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/homePageScreen.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/searchDeviceScreen.dart';
 import 'package:campsite_fms_app_manager/screen/more/morePageScreen.dart';
 import 'package:campsite_fms_app_manager/screen/notification/notiPageScreen.dart';
 import 'package:campsite_fms_app_manager/screen/sign/loginScreen.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
       title: '모닥모닥',
       debugShowCheckedModeBanner: false,
       home: MainFunction(0),
+      // MainFunction(0),
       routes: {
         '/login': (context) => LoginScreen(),
         '/signIn': (context) => SignUpScreen(),
@@ -63,6 +65,7 @@ class MyApp extends StatelessWidget {
         '/campDetail': (context) => CampDetailScreen(),
         '/electricInfo': (context) => ElectricInfo(),
         '/electricScreen': (contetx) => ElectricScreen(),
+        '/search': (contetx) => SearchDeviceScreen()
       },
     );
   }

@@ -30,34 +30,8 @@ class ElectricListScreenState extends State<ElectricListScreen> {
   List<String> campNameList = [];
   List<String> campIdList = [];
 
-  // Future<Null> getData() async {
-  //   var url = Env.url + '/api/campsite/manager/info';
-  //   String value = await token.read(key: 'token');
-  //   String myToken = ("Bearer " + value);
-
-  //   var response = await http.post(url, headers: {
-  //     'Authorization': myToken,
-  //   });
-
-  //   setState(() {
-  //     var newData = utf8.decode(response.bodyBytes);
-  //     var data = jsonDecode(newData);
-
-  //     for (var i = 0; i < data.length; i++) {
-  //       campNameList.add(data[i]['name'].toString());
-  //       campIdList.add(data[i]['id'].toString());
-  //     }
-  //     selected = campNameList[0];
-
-  //     Provider.of<ElectricProvider>(context, listen: true)
-  //         .setCampId(campIdList[0].toString());
-  //   });
-  // }
-
   @override
   void initState() {
-    // TODO: implement initState
-    // _getData();
     super.initState();
   }
 
@@ -87,12 +61,6 @@ class ElectricListScreenState extends State<ElectricListScreen> {
                   selectedIndex = controller.campNameList.indexOf(value);
                   controller
                       .setSelectedCampId(controller.campIdList[selectedIndex]);
-                  // Provider.of<ElectricProvider>(context, listen: true)
-                  //     .setCampId(campIdList[selectedIndex].toString());
-
-                  // print("selected: " + selected);
-                  // print("selectedIndex: " + selectedIndex.toString());
-                  // print("selectedId: " + campIdList[selectedIndex].toString());
                 });
               },
             ),
@@ -117,9 +85,6 @@ class ElectricListScreenState extends State<ElectricListScreen> {
                               ? 0
                               : controller.detailData?.length,
                           itemBuilder: (context, index) {
-                            // print("length: " +
-                            //     controller.detailData[1].toString());
-
                             return ElectricCategoryTile.buildTile(
                                 context, controller.detailData[index]);
                           },

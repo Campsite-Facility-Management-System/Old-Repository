@@ -22,23 +22,29 @@ class SetDeviceWifiScreenState extends State<SetDeviceWifiScreen> {
           child: Form(
         child: Column(
           children: [
+            SizedBox(
+              height: 100,
+            ),
             Text('Wifi 선택'),
-            DropdownButton(
-              value: selected,
-              items: wifiList.map(
-                (value) {
-                  return DropdownMenuItem(
-                    value: value,
-                    child: Text(value),
-                  );
-                },
-              ).toList(),
-              onChanged: (value) {
-                setState(() {
-                  selected = value;
-                  controller.setSelectedWifi(selected);
-                });
-              },
+            // DropdownButton(
+            //   value: selected,
+            //   items: wifiList.map(
+            //     (value) {
+            //       return DropdownMenuItem(
+            //         value: value,
+            //         child: Text(value),
+            //       );
+            //     },
+            //   ).toList(),
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selected = value;
+            //       controller.setSelectedWifi(selected);
+            //     });
+            //   },
+            // ),
+            SizedBox(
+              height: 100,
             ),
             Text('WiFi 비밀번호'),
             TextFormField(

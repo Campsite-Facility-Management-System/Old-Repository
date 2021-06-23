@@ -1,13 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/deviceList.dart';
+import 'package:campsite_fms_app_manager/getX/campDetailGetX.dart';
+import 'package:campsite_fms_app_manager/model/homePage/device/deviceTile.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/addCampScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CategoryTile {
+  final controller = Get.put(CampDetailGetX());
   static Widget buildTile(context, item) => Container(
         child: Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -17,47 +21,67 @@ class CategoryTile {
               Radius.circular(20),
             ),
           ),
-          child: Column(
-            children: <Widget>[
-              ListTile(
-                title: new CachedNetworkImage(
-                  imageBuilder:
-                      (BuildContext context, ImageProvider imageProvider) {
-                    return Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.2, color: Colors.black12),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        shape: BoxShape.rectangle,
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+          child: GetBuilder(
+            builder: (_) {
+              return Column(
+                children: <Widget>[
+                  ListTile(
+                    title: new CachedNetworkImage(
+                      imageBuilder:
+                          (BuildContext context, ImageProvider imageProvider) {
+                        return Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(width: 0.2, color: Colors.black12),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            shape: BoxShape.rectangle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        );
+                      },
+                      imageUrl: Env.url + item['img_url'],
+                      placeholder: (context, url) => Container(
+                        height: 100,
+                        child: SizedBox(
+                          height: 50,
                         ),
                       ),
-                    );
-                  },
-                  imageUrl: Env.url + item['img_url'],
-                  placeholder: (context, url) => Container(
-                    height: 500,
-                    child: SizedBox(
-                      height: 300,
+                      errorWidget: (context, url, error) =>
+                          new Icon(Icons.error),
                     ),
                   ),
-                  errorWidget: (context, url, error) => new Icon(Icons.error),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  item['name'],
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                ),
-              ),
-              ListTile(
-                title: DeviceList(item['id']),
-              )
-            ],
+                  ListTile(
+                    title: Text(
+                      item['name'],
+                      style:
+                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount:
+                        item['device'] == null ? 0 : item['device']?.length,
+                    itemBuilder: (context, index) {
+                      // print("index: " + index.toString());
+                      // print("list index: " + deviceList[index].toString());
+                      return DeviceTile.buildTile(
+                          context, item['device'][index]);
+                    },
+                  ),
+                  // ListTile(
+                  //   title: DeviceList(item['deviceList']),
+                  // )
+                ],
+              );
+            },
           ),
         ),
       );

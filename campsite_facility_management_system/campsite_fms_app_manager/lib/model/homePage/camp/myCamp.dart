@@ -44,9 +44,9 @@ class MyCamp {
                   },
                   imageUrl: Env.url + item['img_url'],
                   placeholder: (context, url) => Container(
-                    height: 100,
+                    height: 50,
                     child: SizedBox(
-                      height: 100,
+                      height: 50,
                     ),
                   ),
                   errorWidget: (context, url, error) => new Icon(Icons.error),
@@ -71,10 +71,9 @@ class MyCamp {
                 title: RaisedButton(
                   color: Colors.green,
                   onPressed: () => {
-                    Provider.of<IdCollector>(context, listen: false)
-                        .setCampId(item['id']),
-                    controller.selectedCampId = item['id'],
-                    Navigator.pushNamed(context, '/campDetail')
+                    controller.setSelectedCampId(item['id']),
+                    controller.apiCampDetail(),
+                    Get.to(CampDetailScreen()),
                   },
                   child: Text(
                     '관리',

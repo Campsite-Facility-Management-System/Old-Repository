@@ -1,5 +1,6 @@
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/getX/campDetailGetX.dart';
 import 'package:campsite_fms_app_manager/getX/setDeviceGetX.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/bluetoothScreen.dart';
@@ -40,8 +41,8 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SetDeviceGetX());
-
+    // final controller = Get.put(SetDeviceGetX());
+    final campDetailController = Get.put(CampDetailGetX());
     // List ciList = Provider.of<IdCollector>(context, listen: true).ciList;
     // List cnList = Provider.of<IdCollector>(context, listen: true).cnList;
     //selected = cnList[0];
@@ -74,8 +75,10 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                           children: [
                             RaisedButton(
                                 child: Text('블루투스 검색'),
-                                onPressed: () =>
-                                    {Get.to(SearchDeviceScreen())}),
+                                onPressed: () => {
+                                      // Get.to(() => SearchDeviceScreen()),
+                                      Navigator.pushNamed(context, '/search'),
+                                    }),
                           ],
                         ),
                         SizedBox(
@@ -84,7 +87,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                         Row(
                           children: <Widget>[
                             Text('블루투스 이름: '),
-                            Text(controller.bluetoothName ??= '선택되지 않음'),
+                            // Text(controller.bluetoothName ??= '선택되지 않음'),
                           ],
                         ),
                         SizedBox(
@@ -122,7 +125,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                           children: [
                             DropdownButton(
                               value: selected,
-                              items: cMap.keys.map(
+                              items: campDetailController.cMap.keys.map(
                                 (value) {
                                   return DropdownMenuItem(
                                     value: value,
@@ -133,9 +136,10 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                               onChanged: (value) {
                                 setState(() {
                                   selected = value;
-                                  selectedIndex = cMap[selected];
+                                  selectedIndex =
+                                      campDetailController.cMap[selected];
                                   print("selected: " + selected);
-                                  print(cMap[selected]);
+                                  print(campDetailController.cMap[selected]);
                                 });
                               },
                             ),
@@ -148,15 +152,15 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                RaisedButton(
-                  onPressed: () => controller.upload(
-                      _name,
-                      selectedIndex,
-                      Provider.of<IdCollector>(context, listen: true)
-                          .selectedCampId
-                          .toString()),
-                  child: Text('등록하기'),
-                ),
+                // RaisedButton(
+                //   onPressed: () => controller.upload(
+                //       _name,
+                //       selectedIndex,
+                //       Provider.of<IdCollector>(context, listen: true)
+                //           .selectedCampId
+                //           .toString()),
+                //   child: Text('등록하기'),
+                // ),
               ],
             ),
           ),

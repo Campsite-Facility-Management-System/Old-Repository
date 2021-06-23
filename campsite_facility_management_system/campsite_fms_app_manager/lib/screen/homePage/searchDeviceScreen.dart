@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:campsite_fms_app_manager/getX/setDeviceGetX.dart';
 import 'package:campsite_fms_app_manager/model/homePage/bluetoothList.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/setDeviceWifiScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SearchDeviceScreen extends StatefulWidget {
   final bool start;
@@ -18,7 +21,7 @@ class SearchDeviceScreen extends StatefulWidget {
 }
 
 class SearchDeviceScreenState extends State<SearchDeviceScreen> {
-  StreamSubscription<BluetoothDiscoveryResult> _streamSubscription;
+  StreamSubscription<BluetoothDiscoveryResult> streamSubscription;
   List<BluetoothDiscoveryResult> results = List<BluetoothDiscoveryResult>();
   bool isDiscovering;
   BluetoothConnection connection;
@@ -28,10 +31,19 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
   @override
   void initState() {
     super.initState();
-
+    _checkPermissions();
     isDiscovering = widget.start;
     if (isDiscovering) {
       _startDiscovery();
+    }
+  }
+
+  _checkPermissions() async {
+    if (Platform.isAndroid) {
+      if (await Permission.contacts.request().isGranted) {}
+      Map<Permission, PermissionStatus> statuses =
+          await [Permission.location].request();
+      print(statuses[Permission.location]);
     }
   }
 
@@ -44,15 +56,18 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
     _startDiscovery();
   }
 
-  void _startDiscovery() {
-    _streamSubscription =
+  _startDiscovery() async {
+    print("검색 시작");
+    streamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
       setState(() {
         results.add(r);
       });
     });
 
-    _streamSubscription.onDone(() {
+    print(streamSubscription);
+
+    streamSubscription.onDone(() {
       setState(() {
         isDiscovering = false;
       });
@@ -71,7 +86,6 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
         print(".......");
         connection.input.listen((Uint8List data) {
           //Data entry point
-          print("데이터: " + data.toString());
           print('수신 데이터: ' + Utf8Decoder().convert(data));
 
           return Utf8Decoder().convert(data);
@@ -83,32 +97,27 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
     } catch (exception) {
       print('커넥트 결과: Cannot connect, exception occured');
     }
-
-    // try {
-    //   await send(data);
-    // } catch (exception) {
-    //   print("전송 오류");
-    // }
   }
 
-  Future send(data) async {
-    // connection.output.add(data);
-    // await connection.output.allSent;
-
-    connection.output.add(utf8.encode(data + '\r\n'));
+  Future send(Uint8List data) async {
+    connection.output.add(data);
     await connection.output.allSent;
+
+    // connection.output.add(utf8.encode(data + '\r\n'));
+    // await connection.output.allSent;
   }
 
   @override
   void dispose() {
     // Avoid memory leak (`setState` after dispose) and cancel discovery
-    _streamSubscription?.cancel();
-
+    print("검색 종료");
+    streamSubscription?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SetDeviceGetX());
     return Scaffold(
       appBar: AppBar(
         title: isDiscovering
@@ -138,10 +147,8 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
             device: result.device,
             rssi: result.rssi,
             onTap: () {
-              ;
-              Get.to(SetDeviceWifiScreen(),
-                  arguments: connect(result.device.address));
-              // Navigator.of(context).pop(result.device);
+              controller.connect(result.device.address);
+              Get.to(SetDeviceWifiScreen());
             },
             onLongPress: () async {
               try {

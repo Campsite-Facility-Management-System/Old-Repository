@@ -17,6 +17,7 @@ class CampDetailGetX extends GetxController {
   Map<String, int> cMap = new Map();
   Map<String, int> campIndex = new Map();
   var categoryList;
+  var detailData;
 
   setCategoryId(id) {
     this.selectedCategoryId = id;
@@ -34,6 +35,11 @@ class CampDetailGetX extends GetxController {
     this.cnList = list;
   }
 
+  setSelectedCampId(campId) {
+    this.selectedCampId = campId;
+    print('campId: ' + selectedCampId.toString());
+  }
+
   setCMap(index, name) {
     this.cMap[name] = index;
   }
@@ -42,8 +48,18 @@ class CampDetailGetX extends GetxController {
     this.campIndex[name] = index;
   }
 
-  getData() async {
-    var url = Env.url + '/api/category/manager/list';
+  setDetailData(data) {
+    this.detailData = data;
+    update();
+  }
+
+  @override
+  onInit() {
+    super.onInit();
+  }
+
+  apiCampDetail() async {
+    var url = Env.url + '/api/campsite/manager/detail/list';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
@@ -53,10 +69,31 @@ class CampDetailGetX extends GetxController {
       'campsite_id': selectedCampId.toString(),
     });
 
-    categoryList = jsonDecode(utf8.decode(response.bodyBytes));
+    await setDetailData(jsonDecode(utf8.decode(response.bodyBytes)));
 
-    for (var i = 0; i < categoryList.length; i++) {
-      setCMap(categoryList[i]['id'], categoryList[i]['name']);
+    cMap.clear();
+    for (var i = 0; i < detailData.length; i++) {
+      setCMap(detailData[i]['id'], detailData[i]['name']);
     }
+
+    print(detailData);
   }
+
+  // getData() async {
+  //   var url = Env.url + '/api/category/manager/list';
+  //   String value = await token.read(key: 'token');
+  //   String myToken = ("Bearer " + value);
+
+  //   var response = await http.post(url, headers: {
+  //     'Authorization': myToken,
+  //   }, body: {
+  //     'campsite_id': selectedCampId.toString(),
+  //   });
+
+  //   categoryList = jsonDecode(utf8.decode(response.bodyBytes));
+
+  //   for (var i = 0; i < categoryList.length; i++) {
+  //     setCMap(categoryList[i]['id'], categoryList[i]['name']);
+  //   }
+  // }
 }

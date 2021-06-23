@@ -27,7 +27,7 @@ class ElectricGetX extends GetxController {
   apiCampInfo() async {
     var url = Env.url + '/api/campsite/manager/info';
     String value = await token.read(key: 'token');
-    String myToken = ("Bearer " + value);
+    String myToken = ("Bearer " + value.toString());
 
     var response = await http.post(url, headers: {
       'Authorization': myToken,
