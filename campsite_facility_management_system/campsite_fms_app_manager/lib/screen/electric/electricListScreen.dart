@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
 import 'package:campsite_fms_app_manager/getX/electricGetX.dart';
+import 'package:campsite_fms_app_manager/getX/electricGraphGetX.dart';
 import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryList.dart';
 import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryTile.dart';
 import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
@@ -38,6 +39,7 @@ class ElectricListScreenState extends State<ElectricListScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ElectricGetX());
+    final detailController = Get.put(ElectricGraphGetX());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

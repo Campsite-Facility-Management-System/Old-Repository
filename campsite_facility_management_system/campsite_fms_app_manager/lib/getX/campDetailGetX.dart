@@ -78,22 +78,4 @@ class CampDetailGetX extends GetxController {
 
     print(detailData);
   }
-
-  // getData() async {
-  //   var url = Env.url + '/api/category/manager/list';
-  //   String value = await token.read(key: 'token');
-  //   String myToken = ("Bearer " + value);
-
-  //   var response = await http.post(url, headers: {
-  //     'Authorization': myToken,
-  //   }, body: {
-  //     'campsite_id': selectedCampId.toString(),
-  //   });
-
-  //   categoryList = jsonDecode(utf8.decode(response.bodyBytes));
-
-  //   for (var i = 0; i < categoryList.length; i++) {
-  //     setCMap(categoryList[i]['id'], categoryList[i]['name']);
-  //   }
-  // }
 }

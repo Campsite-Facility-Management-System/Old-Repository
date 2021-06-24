@@ -30,7 +30,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
   }
 
   var selected;
-  var selectedIndex;
+  var selectedId;
 
   @override
   void initState() {
@@ -41,13 +41,8 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.put(SetDeviceGetX());
     final campDetailController = Get.put(CampDetailGetX());
-    // List ciList = Provider.of<IdCollector>(context, listen: true).ciList;
-    // List cnList = Provider.of<IdCollector>(context, listen: true).cnList;
-    //selected = cnList[0];
-    Map<String, int> cMap =
-        Provider.of<IdCollector>(context, listen: true).cMap;
+    final setDeviceController = Get.put(SetDeviceGetX());
 
     return SafeArea(
       child: Scaffold(
@@ -82,16 +77,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Text('블루투스 이름: '),
-                            // Text(controller.bluetoothName ??= '선택되지 않음'),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
+                          height: 20,
                         ),
                         Row(
                           children: [
@@ -136,7 +122,7 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                               onChanged: (value) {
                                 setState(() {
                                   selected = value;
-                                  selectedIndex =
+                                  selectedId =
                                       campDetailController.cMap[selected];
                                   print("selected: " + selected);
                                   print(campDetailController.cMap[selected]);
@@ -152,15 +138,14 @@ class AddDeviceScreenState extends State<AddDeviceScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                // RaisedButton(
-                //   onPressed: () => controller.upload(
-                //       _name,
-                //       selectedIndex,
-                //       Provider.of<IdCollector>(context, listen: true)
-                //           .selectedCampId
-                //           .toString()),
-                //   child: Text('등록하기'),
-                // ),
+                RaisedButton(
+                  onPressed: () => setDeviceController.upload(
+                    _name.text,
+                    campDetailController.cMap[selected],
+                    campDetailController.selectedCampId,
+                  ),
+                  child: Text('등록하기'),
+                ),
               ],
             ),
           ),

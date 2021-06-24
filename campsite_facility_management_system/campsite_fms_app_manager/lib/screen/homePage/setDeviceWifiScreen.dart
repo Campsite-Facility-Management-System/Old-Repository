@@ -1,4 +1,5 @@
 import 'package:campsite_fms_app_manager/getX/setDeviceGetX.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/searchDeviceScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,14 +10,17 @@ class SetDeviceWifiScreen extends StatefulWidget {
 }
 
 class SetDeviceWifiScreenState extends State<SetDeviceWifiScreen> {
-  TextEditingController password;
+  TextEditingController password = new TextEditingController();
   var selected;
+
+  data() {
+    print(password.text);
+  }
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SetDeviceGetX());
-    var wifiList = Get.arguments;
-
+    selected = controller.selectedWifi;
     return Scaffold(
       body: SingleChildScrollView(
           child: Form(
@@ -26,23 +30,27 @@ class SetDeviceWifiScreenState extends State<SetDeviceWifiScreen> {
               height: 100,
             ),
             Text('Wifi 선택'),
-            // DropdownButton(
-            //   value: selected,
-            //   items: wifiList.map(
-            //     (value) {
-            //       return DropdownMenuItem(
-            //         value: value,
-            //         child: Text(value),
-            //       );
-            //     },
-            //   ).toList(),
-            //   onChanged: (value) {
-            //     setState(() {
-            //       selected = value;
-            //       controller.setSelectedWifi(selected);
-            //     });
-            //   },
-            // ),
+            GetBuilder<SetDeviceGetX>(
+              builder: (_) {
+                return DropdownButton(
+                  value: selected,
+                  items: controller.wifiList.map(
+                    (value) {
+                      return DropdownMenuItem(
+                        value: value,
+                        child: Text(value),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selected = value;
+                      controller.setSelectedWifi(value);
+                    });
+                  },
+                );
+              },
+            ),
             SizedBox(
               height: 100,
             ),
@@ -55,8 +63,7 @@ class SetDeviceWifiScreenState extends State<SetDeviceWifiScreen> {
             RaisedButton(
               child: Text('연결하기'),
               onPressed: () => {
-                controller.sendWifiData(password),
-                Get.off(SearchDeviceScreen()),
+                controller.sendWifiData(password.text),
               },
             )
           ],

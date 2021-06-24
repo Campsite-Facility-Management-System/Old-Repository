@@ -61,7 +61,9 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
     streamSubscription =
         FlutterBluetoothSerial.instance.startDiscovery().listen((r) {
       setState(() {
-        results.add(r);
+        if (r.device.name != null) {
+          results.add(r);
+        }
       });
     });
 
@@ -74,37 +76,9 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
     });
   }
 
-  connect(String address) async {
-    try {
-      connection = await BluetoothConnection.toAddress(address);
-      print('커넥트 결과: Connected to the device');
-
-      try {
-        connection.output.add(utf8.encode('abc' + '\r\n'));
-        await connection.output.allSent;
-
-        print(".......");
-        connection.input.listen((Uint8List data) {
-          //Data entry point
-          print('수신 데이터: ' + Utf8Decoder().convert(data));
-
-          return Utf8Decoder().convert(data);
-        });
-      } catch (exception) {
-        print("수신 오류");
-        print(exception);
-      }
-    } catch (exception) {
-      print('커넥트 결과: Cannot connect, exception occured');
-    }
-  }
-
   Future send(Uint8List data) async {
     connection.output.add(data);
     await connection.output.allSent;
-
-    // connection.output.add(utf8.encode(data + '\r\n'));
-    // await connection.output.allSent;
   }
 
   @override
@@ -148,7 +122,7 @@ class SearchDeviceScreenState extends State<SearchDeviceScreen> {
             rssi: result.rssi,
             onTap: () {
               controller.connect(result.device.address);
-              Get.to(SetDeviceWifiScreen());
+              Get.off(SetDeviceWifiScreen());
             },
             onLongPress: () async {
               try {

@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:campsite_fms_app_manager/env.dart';
+import 'package:campsite_fms_app_manager/function/mainFunction.dart';
+import 'package:campsite_fms_app_manager/screen/homePage/addDeviceScreen.dart';
 import 'package:campsite_fms_app_manager/screen/homePage/campDetailScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
@@ -17,27 +19,30 @@ class SetDeviceGetX extends GetxController {
   bool isDiscovering;
   BluetoothConnection connection;
   var selectedWifi;
-  TextEditingController password;
-  var bluetoothName;
+  var password;
   var uuid;
+  var wifiList = [];
+  var selectedWifiName;
+  int count = 0;
 
-  setSelectedWifi(id) {
-    selectedWifi = id;
+  setSelectedWifi(wifiName) {
+    selectedWifi = wifiName;
+    print(selectedWifi);
   }
 
   sendWifiData(password) async {
-    connection.output.add(
-        utf8.encode(selectedWifi.toString() + password.toString() + '\r\n'));
+    print(selectedWifi.toString() + ',' + password.toString() + '\r\n');
+    connection.output.add(utf8
+        .encode(selectedWifi.toString() + ',' + password.toString() + '\r\n'));
     await connection.output.allSent;
-
-    connection.input.listen((Uint8List data) {
-      print('와이파이 설정 응답: ' + Utf8Decoder().convert(data));
-
-      return Utf8Decoder().convert(data);
-    });
   }
 
   upload(deviceName, categoryId, campsiteId) async {
+    print('디바이스: ' + deviceName.toString());
+    print('카테고리id: ' + categoryId.toString());
+    print('캠프id: ' + campsiteId.toString());
+    print('uuid: ' + uuid.toString());
+
     var url = Env.url + '/api/device/manager/add';
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
@@ -45,19 +50,50 @@ class SetDeviceGetX extends GetxController {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers.addAll({'Authorization': myToken});
     request.fields.addAll({
-      'name': deviceName.text,
-      'uuid': uuid.text,
+      'name': deviceName.toString(),
+      'uuid': uuid.toString(),
       'category_id': categoryId.toString(),
-      'campsite_id': campsiteId,
+      'campsite_id': campsiteId.toString(),
     });
 
     var response = await request.send();
+    print(response.statusCode);
+    print(response.reasonPhrase.toString());
+    print(response.stream.bytesToString());
 
     if (response.statusCode == 200) {
-      // Navigator.pushNamed(context, '/campDetail');
-      Get.off(CampDetailScreen());
+      Get.offAll(MainFunction(0));
     } else if (response.statusCode == 401) {
       // print("error");
+    }
+  }
+
+  receive(Uint8List data) {
+    if (count == 0) {
+      print('수신 데이터: ' + Utf8Decoder().convert(data));
+
+      var tmp = Utf8Decoder().convert(data).split(',');
+      for (int i = 0; i < tmp.length - 1; i++) {
+        wifiList.add(tmp[i]);
+      }
+      selectedWifi = wifiList[0];
+      print('와이파이 리스트: ' + wifiList.toString());
+      print('선택된 리스트: ' + selectedWifi.toString());
+
+      count++;
+      update();
+    } else if (count == 1) {
+      var tmp = Utf8Decoder().convert(data).split(',');
+      if (tmp[0] == '0') {
+        print("error");
+      } else {
+        uuid = tmp[1];
+        print(uuid);
+      }
+      count = 0;
+      update();
+
+      Get.offAll(AddDeviceScreen());
     }
   }
 
@@ -67,16 +103,11 @@ class SetDeviceGetX extends GetxController {
       print('커넥트 결과: Connected to the device');
 
       try {
-        connection.output.add(utf8.encode('abc' + '\r\n'));
+        connection.output.add(utf8.encode('0' + '\r\n'));
         await connection.output.allSent;
 
-        print(".......");
-        connection.input.listen((Uint8List data) {
+        connection.input.listen(receive).onDone(() {
           //Data entry point
-          print("데이터: " + data.toString());
-          print('수신 데이터: ' + Utf8Decoder().convert(data));
-
-          return Utf8Decoder().convert(data);
         });
       } catch (exception) {
         print("수신 오류");

@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:campsite_fms_app_manager/env.dart';
 import 'package:campsite_fms_app_manager/function/mainFunction.dart';
 import 'package:campsite_fms_app_manager/function/token/tokenFunction.dart';
+import 'package:campsite_fms_app_manager/getX/electricGraphGetX.dart';
 import 'package:campsite_fms_app_manager/model/electric/usageData.dart';
 import 'package:campsite_fms_app_manager/provider/idCollector.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
@@ -44,12 +46,6 @@ class ElectricInfoState extends State<ElectricInfo> {
       list = jsonDecode(d) as Map;
       Provider.of<UsageData>(context, listen: true).setUsage(list["usage"]);
       Provider.of<UsageData>(context, listen: true).setCharge(list["charge"]);
-      // data = jsonDecode(d);
-      // if (data.switchStatus == 1) {
-      //   isSwitched = true;
-      // } else {
-      //   isSwitched = false;
-      // }
     });
   }
 
@@ -114,6 +110,7 @@ class ElectricInfoState extends State<ElectricInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ElectricGraphGetX());
     return Container(
       child: Column(
         children: [
@@ -164,7 +161,7 @@ class ElectricInfoState extends State<ElectricInfo> {
                       setState(() {
                         isSwitched = value;
 
-                        _changeStatus();
+                        controller.apichangeStatus();
                       });
                     },
                   ),
@@ -202,16 +199,9 @@ class ElectricInfoState extends State<ElectricInfo> {
                     SizedBox(
                       height: 20,
                     ),
-                    ChangeNotifierProvider<UsageData>(
-                      create: (_) => UsageData(0, 0),
-                      child: Consumer<UsageData>(
-                          builder: (_, provider, child) => Text(
-                                Provider.of<UsageData>(context, listen: true)
-                                        .usage
-                                        .toString() +
-                                    "kW",
-                                style: TextStyle(fontSize: 30),
-                              )),
+                    Text(
+                      controller.usage.toString() + "kW",
+                      style: TextStyle(fontSize: 30),
                     ),
                   ],
                 ),
@@ -243,17 +233,9 @@ class ElectricInfoState extends State<ElectricInfo> {
                     SizedBox(
                       height: 20,
                     ),
-                    ChangeNotifierProvider<UsageData>(
-                      create: (_) => UsageData(0, 0),
-                      child: Consumer<UsageData>(
-                        builder: (_, provider, child) => Text(
-                          Provider.of<UsageData>(context, listen: true)
-                                  .charge
-                                  .toString() +
-                              "원",
-                          style: TextStyle(fontSize: 30),
-                        ),
-                      ),
+                    Text(
+                      controller.charge.toString() + "원",
+                      style: TextStyle(fontSize: 30),
                     ),
                   ],
                 ),
