@@ -19,7 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String phone) async {
     if (_formKey.currentState.validate()) {
       var url = Env.url + '/api/auth/manager/register';
-      var response = await http.post(url, body: {
+      var response = await http.post(Uri.parse(url), body: {
         'email': email,
         'password': passwd,
         'nick_name': nickName,

@@ -30,7 +30,7 @@ class TokenGetX extends GetxController {
     String myToken = "Bearer" + value.toString();
 
     if (value != null) {
-      var response = await http.post(url, headers: {
+      var response = await http.post(Uri.parse(url), headers: {
         'Authorization': myToken,
       });
       // print(response.body);
@@ -56,7 +56,7 @@ class TokenGetX extends GetxController {
     var r = await token.read(key: 'token');
     print(r);
     var url = Env.url + '/api/auth/login';
-    var response = await http.post(url, body: {
+    var response = await http.post(Uri.parse(url), body: {
       'password': passwd,
       'email': email,
     });
@@ -91,7 +91,7 @@ class TokenGetX extends GetxController {
     String value = await token.read(key: 'token');
     String myToken = "Bearer" + value.toString();
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     });
 

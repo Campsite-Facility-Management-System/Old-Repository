@@ -21,10 +21,15 @@ class AddPictureState extends State<AddPicture> {
   final addCategory = new AddCategoryScreenState();
 
   getImage() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 30);
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+
     setState(() {
-      _image = image;
+      if (pickedImage != null) {
+        _image = File(pickedImage.path);
+      } else {
+        print('no image');
+      }
     });
 
     //camp=1, category=2

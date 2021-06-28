@@ -35,7 +35,7 @@ class ElectricInfoState extends State<ElectricInfo> {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'device_id': '1'
@@ -57,7 +57,7 @@ class ElectricInfoState extends State<ElectricInfo> {
     String myToken = ("Bearer " + value);
     List<dynamic> l = List();
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'campsite_id': '1',
@@ -90,7 +90,7 @@ class ElectricInfoState extends State<ElectricInfo> {
     }
 
     // print(status.toString());
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'device_id': '1',

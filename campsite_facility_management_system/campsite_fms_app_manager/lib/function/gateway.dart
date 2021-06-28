@@ -22,7 +22,7 @@ class Gateway {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    final response = await http.post(url, headers: {
+    final response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     });
 
@@ -43,7 +43,7 @@ class Gateway {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value.toString());
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     });
 
@@ -67,7 +67,7 @@ class Gateway {
     //     Provider.of<IdCollector>(context, listen: true)
     //         .selectedCampId
     //         .toString());
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'campsite_id': Provider.of<IdCollector>(context, listen: true)

@@ -63,7 +63,7 @@ class CampDetailGetX extends GetxController {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'campsite_id': selectedCampId.toString(),

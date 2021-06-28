@@ -86,7 +86,7 @@ class ElectricGraphGetX extends GetxController {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'device_id': deviceId.toString(),
@@ -108,7 +108,7 @@ class ElectricGraphGetX extends GetxController {
 
     print('확인: ' + campId.toString());
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'campsite_id': '1',
@@ -142,7 +142,7 @@ class ElectricGraphGetX extends GetxController {
     }
 
     // print(status.toString());
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'device_id': deviceId.toString(),
@@ -161,7 +161,7 @@ class ElectricGraphGetX extends GetxController {
     String value = await token.read(key: 'token');
     String myToken = ("Bearer " + value);
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'device_id': deviceId.toString(),

@@ -28,7 +28,7 @@ class ElectricCategoryListState extends State<ElectricCategoryList> {
 
     print("campId: " + widget.campId);
 
-    var response = await http.post(url, headers: {
+    var response = await http.post(Uri.parse(url), headers: {
       'Authorization': myToken,
     }, body: {
       'campsite_id': widget.campId,
