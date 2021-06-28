@@ -92,7 +92,7 @@ class SetDeviceGetX extends GetxController {
       }
       count = 0;
       update();
-
+      connection.close();
       Get.offAll(AddDeviceScreen());
     }
   }
@@ -101,7 +101,6 @@ class SetDeviceGetX extends GetxController {
     try {
       connection = await BluetoothConnection.toAddress(address);
       print('커넥트 결과: Connected to the device');
-
       try {
         connection.output.add(utf8.encode('0' + '\r\n'));
         await connection.output.allSent;
