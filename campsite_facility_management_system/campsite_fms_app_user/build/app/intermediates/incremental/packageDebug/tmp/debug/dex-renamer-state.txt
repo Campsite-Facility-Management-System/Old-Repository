@@ -1,0 +1,4 @@
+#Thu Jun 24 15:13:57 KST 2021
+base.0=/Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

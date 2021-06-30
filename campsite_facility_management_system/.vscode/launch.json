@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "campsite_fms_app_manager",
+            "cwd": "campsite_fms_app_manager",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "campsite_fms_app_manager (profile mode)",
+            "cwd": "campsite_fms_app_manager",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "campsite_fms_app_user",
+            "cwd": "campsite_fms_app_user",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "campsite_fms_app_user (profile mode)",
+            "cwd": "campsite_fms_app_user",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        }
+    ]
+}
