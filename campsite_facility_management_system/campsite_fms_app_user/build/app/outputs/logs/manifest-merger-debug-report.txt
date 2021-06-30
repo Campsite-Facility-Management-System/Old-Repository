@@ -1,0 +1,231 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+MERGED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+MERGED from [:fluttertoast] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_secure_storage] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-22:12
+MERGED from [:flutter_plugin_android_lifecycle] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [com.airbnb.android:lottie:3.5.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/c1c727802a0f757bb906ef3d1aff5fd2/lottie-3.5.0/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/49f34d7e88042f1a5ec554ddf9a81d6e/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0414d072cc30439c2098c094f243f8d2/appcompat-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/70fb1f2b924f0b08c66b403da6dc5130/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/05de229e61062f2046b633363d539f0f/vectordrawable-animated-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/960bc9100bb9056f9ae640dee9328264/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/12163b7f1219d7803db9a9c6981f932d/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb7ed1fc423097947bd504eee7edca98/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/7d159f94e4b9b880a79fb9db2c44f27e/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e682646bf4fff225b0a24f2d9896c233/activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/3914725961a685ee0c4ad604f2ec7700/vectordrawable-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/08904a34f35086d6f42d3ddf0455a84e/coordinatorlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb6fc43168e4bf3db9b0de71122427e5/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0e544849e56de0ecbbebd6fa88c286b3/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/61dbe548deb4e4b9a378ea11bb6e300d/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e67446dd6749493a6535cb83df2d6466/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d2cde71c2b535cbc172a8ad64d99fa81/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6e003bffc6816983784cf7bfcea7b62a/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/88cb379309714e02759a61e0d691ebff/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d6e99ec84546a5687169adf70ad9fe5d/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/24e7abffcaf3c8d067a58e7efeea84e7/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a36fe70167ca2a5004d79e2a488f1cb3/exifinterface-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6873be941f84c5836be313161bc589be/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/434ed92ad7732ac3164a528c3d91b5de/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/92cf78d4e7bf8a345fdcf6015e88ae2b/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/f724a3ced94f2dce6498925e52de79fa/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/4113096df0697abc53a6710decb11c33/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/1cf235406a8a313615b724a1794af36c/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a871394fc2ce30e69e34538f7d957479/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/9528a6cb13355ac2a472f285f74c1415/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:2:5-48
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:1-47:12
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:8:5-46:19
+MERGED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:10:5-20:19
+MERGED from [com.airbnb.android:lottie:3.5.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/c1c727802a0f757bb906ef3d1aff5fd2/lottie-3.5.0/AndroidManifest.xml:9:5-20
+MERGED from [com.airbnb.android:lottie:3.5.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/c1c727802a0f757bb906ef3d1aff5fd2/lottie-3.5.0/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/49f34d7e88042f1a5ec554ddf9a81d6e/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/49f34d7e88042f1a5ec554ddf9a81d6e/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/434ed92ad7732ac3164a528c3d91b5de/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/434ed92ad7732ac3164a528c3d91b5de/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:10:9-46
+	android:icon
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:11:9-43
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:9:9-57
+activity#com.example.campsite_fms_app_user.MainActivity
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:12:9-40:20
+	android:launchMode
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:14:13-43
+	android:hardwareAccelerated
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:17:13-47
+	android:windowSoftInputMode
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:18:13-55
+	android:configChanges
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:16:13-163
+	android:theme
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:15:13-47
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:13:13-41
+meta-data#io.flutter.embedding.android.NormalTheme
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:23:13-26:17
+	android:resource
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:25:15-52
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:24:15-70
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:36:13-39:29
+action#android.intent.action.MAIN
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:37:17-68
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:37:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:38:17-76
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:38:27-74
+meta-data#flutterEmbedding
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:43:9-45:33
+	android:value
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:45:13-30
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml:44:13-44
+uses-sdk
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+MERGED from [:fluttertoast] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/fluttertoast/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_secure_storage] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:flutter_secure_storage] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie:3.5.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/c1c727802a0f757bb906ef3d1aff5fd2/lottie-3.5.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.airbnb.android:lottie:3.5.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/c1c727802a0f757bb906ef3d1aff5fd2/lottie-3.5.0/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/49f34d7e88042f1a5ec554ddf9a81d6e/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/49f34d7e88042f1a5ec554ddf9a81d6e/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0414d072cc30439c2098c094f243f8d2/appcompat-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0414d072cc30439c2098c094f243f8d2/appcompat-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/70fb1f2b924f0b08c66b403da6dc5130/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/70fb1f2b924f0b08c66b403da6dc5130/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/05de229e61062f2046b633363d539f0f/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/05de229e61062f2046b633363d539f0f/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/960bc9100bb9056f9ae640dee9328264/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/960bc9100bb9056f9ae640dee9328264/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/12163b7f1219d7803db9a9c6981f932d/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/12163b7f1219d7803db9a9c6981f932d/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb7ed1fc423097947bd504eee7edca98/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb7ed1fc423097947bd504eee7edca98/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/7d159f94e4b9b880a79fb9db2c44f27e/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/7d159f94e4b9b880a79fb9db2c44f27e/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e682646bf4fff225b0a24f2d9896c233/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e682646bf4fff225b0a24f2d9896c233/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/3914725961a685ee0c4ad604f2ec7700/vectordrawable-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/3914725961a685ee0c4ad604f2ec7700/vectordrawable-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/08904a34f35086d6f42d3ddf0455a84e/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/08904a34f35086d6f42d3ddf0455a84e/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb6fc43168e4bf3db9b0de71122427e5/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/eb6fc43168e4bf3db9b0de71122427e5/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0e544849e56de0ecbbebd6fa88c286b3/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/0e544849e56de0ecbbebd6fa88c286b3/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/61dbe548deb4e4b9a378ea11bb6e300d/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/61dbe548deb4e4b9a378ea11bb6e300d/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e67446dd6749493a6535cb83df2d6466/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/e67446dd6749493a6535cb83df2d6466/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d2cde71c2b535cbc172a8ad64d99fa81/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d2cde71c2b535cbc172a8ad64d99fa81/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/8237b252072825cc966619d8e18282b1/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6e003bffc6816983784cf7bfcea7b62a/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6e003bffc6816983784cf7bfcea7b62a/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/88cb379309714e02759a61e0d691ebff/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/88cb379309714e02759a61e0d691ebff/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d6e99ec84546a5687169adf70ad9fe5d/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/d6e99ec84546a5687169adf70ad9fe5d/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/24e7abffcaf3c8d067a58e7efeea84e7/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/24e7abffcaf3c8d067a58e7efeea84e7/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a36fe70167ca2a5004d79e2a488f1cb3/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a36fe70167ca2a5004d79e2a488f1cb3/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6873be941f84c5836be313161bc589be/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/6873be941f84c5836be313161bc589be/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/434ed92ad7732ac3164a528c3d91b5de/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/434ed92ad7732ac3164a528c3d91b5de/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/92cf78d4e7bf8a345fdcf6015e88ae2b/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/92cf78d4e7bf8a345fdcf6015e88ae2b/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/f724a3ced94f2dce6498925e52de79fa/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/f724a3ced94f2dce6498925e52de79fa/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/4113096df0697abc53a6710decb11c33/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/4113096df0697abc53a6710decb11c33/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/1cf235406a8a313615b724a1794af36c/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/1cf235406a8a313615b724a1794af36c/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a871394fc2ce30e69e34538f7d957479/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/a871394fc2ce30e69e34538f7d957479/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/9528a6cb13355ac2a472f285f74c1415/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yhmac/.gradle/caches/transforms-2/files-2.1/9528a6cb13355ac2a472f285f74c1415/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml:6:5-66
+	android:name
+		ADDED from /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/android/app/src/debug/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:8:22-78
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:16:13-18:75
+	android:resource
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:18:17-72
+	android:name
+		ADDED from [:image_picker] /Users/yhmac/Graduation-Project/campsite_facility_management_system/campsite_fms_app_user/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:17:17-67

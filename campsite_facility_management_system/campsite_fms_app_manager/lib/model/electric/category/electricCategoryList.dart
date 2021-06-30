@@ -1,0 +1,121 @@
+import 'package:campsite_fms_app_manager/env.dart';
+<<<<<<< Updated upstream
+import 'package:campsite_fms_app_manager/getX/electricGraphGetX.dart';
+import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryTile.dart';
+import 'package:campsite_fms_app_manager/provider/electricProvider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+=======
+import 'package:campsite_fms_app_manager/function/gateway.dart';
+import 'package:campsite_fms_app_manager/model/electric/category/electricCategoryTile.dart';
+import 'package:campsite_fms_app_manager/model/homePage/category/categoryTile.dart';
+import 'package:campsite_fms_app_manager/provider/idCollector.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+>>>>>>> Stashed changes
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:provider/provider.dart';
+
+class ElectricCategoryList extends StatefulWidget {
+  final String campId;
+  const ElectricCategoryList(this.campId);
+
+  @override
+  ElectricCategoryListState createState() => ElectricCategoryListState();
+}
+
+class ElectricCategoryListState extends State<ElectricCategoryList> {
+  final token = new FlutterSecureStorage();
+<<<<<<< Updated upstream
+  var data;
+
+  Future<Null> _getDetailData() async {
+=======
+  final gateway = new Gateway();
+  var data;
+
+  Future<Null> _getData() async {
+>>>>>>> Stashed changes
+    var url = Env.url + '/api/device/manager/energy/list';
+    String value = await token.read(key: 'token');
+    String myToken = ("Bearer " + value);
+
+    print("campId: " + widget.campId);
+
+<<<<<<< Updated upstream
+    var response = await http.post(Uri.parse(url), headers: {
+=======
+    var response = await http.post(url, headers: {
+>>>>>>> Stashed changes
+      'Authorization': myToken,
+    }, body: {
+      'campsite_id': widget.campId,
+    });
+
+<<<<<<< Updated upstream
+    data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('데이터: ' + data.toString());
+=======
+    setState(() {
+      var new_data = utf8.decode(response.bodyBytes);
+      data = jsonDecode(new_data);
+      print(data);
+    });
+>>>>>>> Stashed changes
+  }
+
+  @override
+  void initState() {
+<<<<<<< Updated upstream
+    _getDetailData();
+    super.initState();
+=======
+    super.initState();
+    _getData();
+>>>>>>> Stashed changes
+  }
+
+  @override
+  Widget build(BuildContext context) {
+<<<<<<< Updated upstream
+    return Column(
+      children: <Widget>[
+        RaisedButton(
+          child: Text('캠핑장 변경/새로고침'),
+          onPressed: () => {_getDetailData()},
+        ),
+        Container(
+          height: 650,
+          margin: EdgeInsets.only(left: 10, right: 10),
+          child: ListView.builder(
+            // shrinkWrap: true,
+            itemCount: data == null ? 0 : data?.length,
+            itemBuilder: (context, index) {
+              return ElectricCategoryTile.buildTile(context, data[index]);
+            },
+          ),
+        ),
+      ],
+=======
+    return Container(
+      height: 650,
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: ListView.builder(
+        // shrinkWrap: true,
+        itemCount: data == null ? 0 : data?.length,
+        itemBuilder: (context, index) {
+          // print("index: " + index.toString());
+          // print("list index: " + categoryList[index].toString());
+
+          return ElectricCategoryTile.buildTile(context, data[index]);
+        },
+        // separatorBuilder: (context, index) =>
+        //     DeviceList(categoryList[index]['id'])
+      ),
+>>>>>>> Stashed changes
+    );
+  }
+}
